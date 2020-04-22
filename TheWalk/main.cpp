@@ -8,7 +8,6 @@
 #include "robin.h"
 #include "joker.h"
 using namespace std;
-int ok;
 
 
 int main()
