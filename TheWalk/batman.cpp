@@ -189,10 +189,10 @@ void batman::Move(harta &H)
         {
             vieti-=2;
             H.matrix[row][col]='*';
-        }                                         //Semn specific pt senzor alertat
+        }                                                   //Semn specific pt senzor alertat
     }
 
-    if(ok==0)                                                            //Ultima solutie ramasa: itemul de tip joker (sau casuta deja vizitata???)
+    if(ok==0)                                               //Ultima solutie ramasa: itemul de tip joker (sau casuta deja vizitata???)
     {
         if(H.matrix[row+1][col]=='3') row++;
         else if(H.matrix[row][col+1]=='3') col++;
