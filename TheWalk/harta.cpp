@@ -47,7 +47,8 @@ istream & operator >> (istream & in, harta &H)
     {
         aux.first=rand()%H.n;
         aux.second=rand()%H.m;
-        if(aux.first!=0 && aux.second!=0)                       //Generare random pt pozitia de final; trebuie sa fie diferita de pozitia de start
+        if(aux.first!=0 && aux.second!=0)                       //Generare random pt pozitia de final;
+                                                                //trebuie sa fie diferita de pozitia de start
         {
             ok=1;
             break;
@@ -81,7 +82,7 @@ istream & operator >> (istream & in, harta &H)
     H.numberSensors=H.m;
     H.matrix[0][0]='S';
     H.matrix[H.finish.first][H.finish.second]='F';
-    for(int i=1; i<=H.numberTraps; i++)                         //Generare aleatoare a capcanelor
+    for(int i=1; i<=H.numberTraps; i++)                         //Generare aleatoare a bombelor (X)
     {
         int x=0,y=0,ok1=0;
         while(ok1==0)
@@ -96,7 +97,7 @@ istream & operator >> (istream & in, harta &H)
         }
         H.matrix[x][y]='X';
     }
-    for(int i=1; i<=H.numberSensors; i++)                        //Generare aleatoare a capcanelor
+    for(int i=1; i<=H.numberSensors; i++)                        //Generare aleatoare a senzorilor (Z)
     {
         int x=0,y=0,ok1=0;
         while(ok1==0)
@@ -111,7 +112,7 @@ istream & operator >> (istream & in, harta &H)
         }
         H.matrix[x][y]='Z';
     }
-    for(int i=1; i<=H.numberItems; i++)                         //Generare aleatoare a itemurilor
+    for(int i=1; i<=H.numberItems; i++)                         //Generare aleatoare a itemurilor (1,2,3)
     {
         int x=0,y=0,ok1=0,z=0;
         while(ok1==0)
