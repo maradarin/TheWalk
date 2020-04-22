@@ -24,7 +24,8 @@ public:
     friend istream & operator >> (istream &, harta &);
     friend ostream & operator << (ostream &, const harta &);
     bool isValid(int, int);                  //verifica daca o celula apartine hartii
-    bool findCoord(int, int);                //verifica prezenta unei perechi de coordonate intr-o coada; metoda folosita pt marcarea senzorilor
+    bool findCoord(int, int);                //verifica prezenta unei perechi de coordonate intr-o coada;
+                                             //metoda folosita pt marcarea senzorilor
     void check(pair<int,int>, int, int a[20][20]);   //functie ce marcheaza la fiecare mutare casutele in care se poate muta robotul
     void trigger(int, int, int);             //verifica prezenta senzorilor in perimetrul vizibil
     void Simulate(robot &A);                 //metoda prin care simulam desfasurarea jocului
