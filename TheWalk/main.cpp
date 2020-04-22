@@ -15,7 +15,7 @@ int main()
     harta H;
     int type,ok;
     cin>>H;
-    cout<<"Alege Robotul (Batman/Robin/Joker) : ";
+    cout<<"Alege Robotul (Batman=1/Robin=2/Joker=3) : ";
     robot *p=NULL;
     while(ok)
     {
