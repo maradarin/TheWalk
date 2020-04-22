@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\batman.cpp
+	"batman.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<algorithm>
+
+1587548615 c:\users\mara\onedrive\desktop\thewalk\batman.h
+	"robot.h"
+
+1587548615 c:\users\mara\onedrive\desktop\thewalk\robot.h
+	<iostream>
+
+1587548615 c:\users\mara\onedrive\desktop\thewalk\harta.h
+	<fstream>
+	<vector>
+
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\harta.cpp
+	"harta.h"
+	<iostream>
+	<new>
+	<cstdlib>
+	"robot.h"
+	<utility>
+	<algorithm>
+	<vector>
+	<queue>
+
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\joker.cpp
+	"joker.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<algorithm>
+
+1587548615 c:\users\mara\onedrive\desktop\thewalk\joker.h
+	"robot.h"
+
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\main.cpp
+	<iostream>
+	<algorithm>
+	<cctype>
+	<string>
+	"harta.h"
+	"robot.h"
+	"batman.h"
+	"robin.h"
+	"joker.h"
+
+1587548616 c:\users\mara\onedrive\desktop\thewalk\robin.h
+	"robot.h"
+	<vector>
+
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\robin.cpp
+	"robin.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<vector>
+	<algorithm>
+
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\robot.cpp
+	"robot.h"
+
