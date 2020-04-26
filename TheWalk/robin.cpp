@@ -1,4 +1,3 @@
-
 #include "robin.h"
 #include "robot.h"
 #include "harta.h"
@@ -24,19 +23,12 @@ void robin::Move(harta &H)
     H.trigger(row,col,viz);
     H.check(make_pair(row,col),viz, dist);
 
-
-    /*for(int i=max(0,row-viz); i<min(H.n,row+viz+1); i++)
-    {
-        for(int j=max(0,col-viz); j<min(H.m,col+viz+1); j++)
-            cout<<dist[i][j]<<" ";
-        cout<<endl;
-    }*/
-
     //retinem coordonatele itemurilor proprii din perimetrul vizibil
     for(int i=max(0,row-viz); i<min(H.n,row+viz+1); i++)
-        for(int j=max(0,col-viz); j<min(H.m,col+viz+1) && dist[i][j]!=-1; j++)
-            if(findCoord(i,j)==true && H.matrix[i][j]=='2') Coord2.push_back(make_pair(i,j));
+        for(int j=max(0,col-viz); j<min(H.m,col+viz+1); j++)
+            if(dist[i][j]!=-1 && findCoord(i,j)==true && H.matrix[i][j]=='2') Coord2.push_back(make_pair(i,j));
 
+    //cout<<Coord2.size()<<endl;
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
@@ -58,44 +50,35 @@ void robin::Move(harta &H)
             col++;
             ok=1;
         }
-        else if (H.finish.first < row)
+        else if (H.finish.first < row && dist[row-1][col]!=-1 && row>=1)
         {
-            if(dist[row-1][col]!=-1 && row>=1)
-            {
-                row--;
-                ok=1;
-            }
+            row--;
+            ok=1;
         }
-        else if (H.finish.first > row)
+        else if (H.finish.first > row && dist[row+1][col]!=-1)
         {
-            if(dist[row+1][col]!=-1)
-            {
-                row++;
-                ok=1;
-            }
+            row++;
+            ok=1;
+
         }
-        else if (H.finish.second < col)
+        else if (H.finish.second < col && dist[row][col-1]!=-1 && col>=1)
         {
-            if(dist[row][col-1]!=-1 && col>=1)
-            {
-                col--;
-                ok=1;
-            }
+            col--;
+            ok=1;
+
         }
-        else if (H.finish.second > col)
+        else if (H.finish.second > col && dist[row][col+1]!=-1)
         {
-            if(dist[row][col+1]!=-1)
-            {
-                col++;
-                ok=1;
-            }
+            col++;
+            ok=1;
+
         }
     }
     // Strategia lui este de a aduna cat mai multe itemuri inainte de a ajunge la destinatie. Va prefera sa se indrepte spre un item
     // de tip 2 decat sa treaca pe o celula goala
     else if(Coord2.size()>0)                // dupa destinatia finala, itemul 2 urmeaza ca prioritate
     {
-        for(vector<pair<int,int> >::iterator it=Coord2.begin(); it!=Coord2.end(); it++)
+        for(vector<pair<int,int> >::iterator it=Coord2.begin(); it!=Coord2.end() && ok==0; it++)
             if (abs(it->first - row) <= viz && abs(it->second - col) <= viz)
             {
                 if(countItems2>0 && it->first>row && it->second>col && dist[row+1][col+1]!=-1)
@@ -116,37 +99,34 @@ void robin::Move(harta &H)
                     col++;
                     ok=1;
                 }
-                else if (it->first < row)
+                else if (it->first < row && dist[row-1][col]!=-1 && row>=1)
                 {
-                    if(dist[row-1][col]!=-1 && row>=1)
-                    {
-                        row--;
-                        ok=1;
-                    }
+                    row--;
+                    ok=1;
                 }
-                else if (it->first > row)
+                else if (it->first > row && dist[row+1][col]!=-1)
                 {
-                    if(dist[row+1][col]!=-1)
-                    {
-                        row++;
-                        ok=1;
-                    }
+                    row++;
+                    ok=1;
                 }
-                else if (it->second < col)
+                else if (it->second < col && dist[row][col-1]!=-1 && col>=1)
                 {
-                    if(dist[row][col-1]!=-1 && col>=1)
-                    {
-                        col--;
-                        ok=1;
-                    }
+                    col--;
+                    ok=1;
                 }
-                else if (it->second > col)
+                else if (it->second > col && dist[row][col+1]!=-1)
                 {
-                    if(dist[row][col+1]!=-1)
-                    {
-                        col++;
-                        ok=1;
-                    }
+                    col++;
+                    ok=1;
+                }
+
+                // daca itemul este chiar inaccesibil, trecem printr-o capcana pt a-l obtine; facem exceptie la itemul de tip joker
+                else if(dist[row][col+1]==-1 && dist[row+1][col]==-1 && H.matrix[row][col+1]!='3' && H.matrix[row+1][col]!='3')
+                {
+                    col++;
+                    ok=1;
+                    if(H.matrix[row][col]=='Z') vieti=vieti-2;
+                    else if(H.matrix[row][col]=='X') vieti--;
                 }
             }
     }
@@ -322,12 +302,13 @@ void robin::Move(harta &H)
     }
     if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
     EffectItem(row,col,H);
+    if(isBlocked(row,col,H)==true) vieti=-100;
 }
 
 
 void robin::EffectItem(int x, int y, harta &H)
 {
-    char *message =new char[100];
+    char *message =new char[1000];
     message[0]='\0';
     if(H.matrix[x][y]=='2')
     {
@@ -351,10 +332,11 @@ void robin::EffectItem(int x, int y, harta &H)
             countItems3++;
             strcat(message,"The joker-item stuck with you and each time you cross over a bomb, you shall lose 2 lives.\n");
         }
+        H.matrix[x][y]='R';
     }
     else if(H.matrix[x][y]=='1')
     {
-        countItems1=1;
+        countItems1++;
         strcpy(message, "You found a batman-item which will aid Robin in his quest!\n");
         if(countItems2>0) strcat(message, "You have gained immunity to all sensors.\n");
         H.matrix[x][y]='R';

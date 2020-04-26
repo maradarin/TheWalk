@@ -6,7 +6,7 @@
 class batman : public robot
 {
 public:
-    void Move(harta&);                          //Robot1 se deplaseaza pe coloane
+    void Move(harta&);                          //Robot1 se deplaseaza pe linii
     void EffectItem(int, int, harta&);
     //virtual ~batman();
 };

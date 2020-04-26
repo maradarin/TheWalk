@@ -14,13 +14,6 @@ void batman::Move(harta &H)
     H.trigger(row,col,viz);
     H.check(make_pair(row,col),viz, dist);
 
-    for(int i=max(0,row-viz);i<min(H.n,row+viz+1);i++)
-    {
-        for(int j=max(0,col-viz);j<min(H.m,col+viz+1);j++)
-            cout<<dist[i][j]<<" ";
-        cout<<endl;
-    }
-
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
@@ -189,22 +182,23 @@ void batman::Move(harta &H)
         {
             vieti-=2;
             H.matrix[row][col]='*';
-        }                                                   //Semn specific pt senzor alertat
+        }                                         //Semn specific pt senzor alertat
     }
 
-    if(ok==0)                                               //Ultima solutie ramasa: itemul de tip joker (sau casuta deja vizitata???)
+    if(ok==0)                                                            //Ultima solutie ramasa: itemul de tip joker (sau casuta deja vizitata???)
     {
         if(H.matrix[row+1][col]=='3') row++;
         else if(H.matrix[row][col+1]=='3') col++;
     }
     if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
+    cout<<"am ales "<<row<< " "<<col<<endl;
     EffectItem(row,col,H);
 }
 
 
 void batman::EffectItem(int x, int y, harta &H)
 {
-    char *message =new char[100];
+    char *message =new char[1000];
     message[0]='\0';
     if(H.matrix[x][y]=='2')
     {

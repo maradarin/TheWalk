@@ -1,4 +1,3 @@
-
 #ifndef _ROBOT_H_
 #define _ROBOT_H_
 #include <iostream>
@@ -21,7 +20,8 @@ public:
     int getItems1() {return countItems1;}
     int getItems2() {return countItems2;}
     int getItems3() {return countItems3;}
-    virtual void Move(harta&)=0;             //metoda virtual pura de deplasare a robotuluii
+    bool isBlocked(int, int, harta&);                //functie care verifica daca un robot a ramas blocat pe harta
+    virtual void Move(harta&)=0;                     //metoda virtual pura de deplasare a robotuluii
     virtual void EffectItem(int, int, harta&)=0;     //metoda virtual pura de folosire a itemului
     //~robot();
 };

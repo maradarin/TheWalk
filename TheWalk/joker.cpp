@@ -1,4 +1,3 @@
-
 #include "joker.h"
 #include "robot.h"
 #include "harta.h"
@@ -7,6 +6,12 @@
 #include <cmath>
 #include <utility>
 #include <algorithm>
+
+int joker::leftCol=0;
+int joker::rightCol=0;
+int joker::upRow=0;
+int joker::downRow=0;
+int joker::mode = 0;
 
 
 void joker::Move(harta &H)
@@ -72,7 +77,7 @@ void joker::Move(harta &H)
 
 void joker::EffectItem(int x, int y, harta &H)
 {
-    char *message =new char[100];
+    char *message =new char[1000];
     message[0]='\0';
     if(H.matrix[x][y]=='2')
     {

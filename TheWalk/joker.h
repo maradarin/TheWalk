@@ -5,7 +5,7 @@
 
 class joker : public robot
 {
-    int leftCol=0,upRow=0,rightCol=0,downRow=0,mode=0;
+    static int leftCol,upRow,rightCol,downRow,mode;
 public:
     void Move(harta&);
     void EffectItem(int, int, harta&);

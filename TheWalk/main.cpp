@@ -8,6 +8,7 @@
 #include "robin.h"
 #include "joker.h"
 using namespace std;
+int ok;
 
 
 int main()
@@ -15,7 +16,7 @@ int main()
     harta H;
     int type,ok;
     cin>>H;
-    cout<<"Alege Robotul (Batman=1/Robin=2/Joker=3) : ";
+    cout<<"Alege Robotul (Batman/Robin/Joker) : ";
     robot *p=NULL;
     while(ok)
     {

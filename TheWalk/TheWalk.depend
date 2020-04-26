@@ -72,3 +72,77 @@
 1587548615 source:c:\users\mara\onedrive\desktop\thewalk\robot.cpp
 	"robot.h"
 
+1587927192 source:c:\users\mara\onedrive\desktop\thewalk ciorna\batman.cpp
+	"batman.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<algorithm>
+
+1587927192 c:\users\mara\onedrive\desktop\thewalk ciorna\batman.h
+	"robot.h"
+
+1587926532 c:\users\mara\onedrive\desktop\thewalk ciorna\robot.h
+	<iostream>
+
+1587925221 c:\users\mara\onedrive\desktop\thewalk ciorna\harta.h
+	<fstream>
+	<vector>
+
+1587923107 source:c:\users\mara\onedrive\desktop\thewalk ciorna\joker.cpp
+	"joker.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<algorithm>
+
+1587908279 c:\users\mara\onedrive\desktop\thewalk ciorna\joker.h
+	"robot.h"
+
+1587906935 source:c:\users\mara\onedrive\desktop\thewalk ciorna\main.cpp
+	<iostream>
+	<algorithm>
+	<cctype>
+	<string>
+	"harta.h"
+	"robot.h"
+	"batman.h"
+	"robin.h"
+	"joker.h"
+
+1587927192 c:\users\mara\onedrive\desktop\thewalk ciorna\robin.h
+	"robot.h"
+	<vector>
+
+1587927192 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robin.cpp
+	"robin.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<vector>
+	<algorithm>
+
+1587926532 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robot.cpp
+	"robot.h"
+	"harta.h"
+
+1587925880 source:c:\users\mara\onedrive\desktop\thewalk ciorna\harta.cpp
+	"harta.h"
+	<iostream>
+	<new>
+	<cstdlib>
+	"robot.h"
+	<utility>
+	<algorithm>
+	<vector>
+	<queue>
+
