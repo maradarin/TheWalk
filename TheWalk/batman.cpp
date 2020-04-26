@@ -10,9 +10,9 @@
 
 void batman::Move(harta &H)
 {
-    int ok=0, dist[20][20],d=0;
+    int ok=0, d=0;
     H.trigger(row,col,viz);
-    H.check(make_pair(row,col),viz, dist);
+    H.check(make_pair(row,col),viz);
 
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
@@ -20,7 +20,7 @@ void batman::Move(harta &H)
         d=1;
         if (H.finish.first < row && row>=1)
         {
-            if(dist[row-1][col]!=-1)
+            if(H.dist[row-1][col]!=-1)
             {
                 row--;
                 ok=1;
@@ -28,7 +28,7 @@ void batman::Move(harta &H)
         }
         else if (H.finish.first > row)
         {
-            if(dist[row+1][col]!=-1)
+            if(H.dist[row+1][col]!=-1)
             {
                 row++;
                 ok=1;
@@ -36,7 +36,7 @@ void batman::Move(harta &H)
         }
         else if (H.finish.second < col && col>=1)
         {
-            if(dist[row][col-1]!=-1)
+            if(H.dist[row][col-1]!=-1)
             {
                 col--;
                 ok=1;
@@ -44,7 +44,7 @@ void batman::Move(harta &H)
         }
         else if (H.finish.second > col)
         {
-            if(dist[row][col+1]!=-1)
+            if(H.dist[row][col+1]!=-1)
             {
                 col++;
                 ok=1;
@@ -65,22 +65,22 @@ void batman::Move(harta &H)
         }
         else
         {
-            if(dist[row+1][col]!=-1)
+            if(H.dist[row+1][col]!=-1)
             {
                 row++;
                 ok=1;
             }
-            else if(dist[row][col+1]!=-1)
+            else if(H.dist[row][col+1]!=-1)
             {
                 col++;
                 ok=1;
             }
-            else if(dist[row][col-1]!=-1 && col>=1)
+            else if(H.dist[row][col-1]!=-1 && col>=1)
             {
                 col--;
                 ok=1;
             }
-            else if(dist[row-1][col]!=-1 && row>=1)
+            else if(H.dist[row-1][col]!=-1 && row>=1)
             {
                 row--;
                 ok=1;
@@ -191,7 +191,6 @@ void batman::Move(harta &H)
         else if(H.matrix[row][col+1]=='3') col++;
     }
     if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
-    cout<<"am ales "<<row<< " "<<col<<endl;
     EffectItem(row,col,H);
 }
 

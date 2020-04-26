@@ -10,6 +10,7 @@ class harta
 private:
     int n,m;                                 //dimensiunile matricei;
     char **matrix;                           //harta pe care se deplaseaza Robotul
+    int **dist;                              //matrice de distante, retine pozitiile pe care se poate deplasa robotul
     pair<int,int>finish;                     //destinatia Robotului
     int numberItems,numberTraps,numberSensors;
     vector<pair<int,int> > ZCoord;           //vector de coordonate ale senzorilor
@@ -24,9 +25,9 @@ public:
     char getCell(int, int);                  // getter care returneaza valoarea dintr-o celula a hartii
     friend istream & operator >> (istream &, harta &);
     friend ostream & operator << (ostream &, const harta &);
-    bool isValid(int, int, char);            //verifica daca o celula apartine hartii
-    bool findCoord(int, int);                //verifica prezenta unei perechi de coordonate intr-o coada; metoda folosita pt marcarea senzorilor
-    void check(pair<int,int>, int, int a[20][20]);   //functie ce marcheaza la fiecare mutare casutele in care se poate muta robotul
+    bool isValid(int, int, char) const;            //verifica daca o celula apartine hartii
+    bool findCoord(int, int) const;                //verifica prezenta unei perechi de coordonate intr-o coada; metoda folosita pt marcarea senzorilor
+    void check(pair<int,int>, int);          //functie ce marcheaza la fiecare mutare casutele in care se poate muta robotul
     void trigger(int, int, int);             //verifica prezenta senzorilor in perimetrul vizibil
     void Simulate(robot &A);                 //metoda prin care simulam desfasurarea jocului
 };

@@ -72,7 +72,7 @@
 1587548615 source:c:\users\mara\onedrive\desktop\thewalk\robot.cpp
 	"robot.h"
 
-1587927192 source:c:\users\mara\onedrive\desktop\thewalk ciorna\batman.cpp
+1587931419 source:c:\users\mara\onedrive\desktop\thewalk ciorna\batman.cpp
 	"batman.h"
 	"robot.h"
 	"harta.h"
@@ -85,14 +85,14 @@
 1587927192 c:\users\mara\onedrive\desktop\thewalk ciorna\batman.h
 	"robot.h"
 
-1587926532 c:\users\mara\onedrive\desktop\thewalk ciorna\robot.h
+1587933121 c:\users\mara\onedrive\desktop\thewalk ciorna\robot.h
 	<iostream>
 
-1587925221 c:\users\mara\onedrive\desktop\thewalk ciorna\harta.h
+1587937639 c:\users\mara\onedrive\desktop\thewalk ciorna\harta.h
 	<fstream>
 	<vector>
 
-1587923107 source:c:\users\mara\onedrive\desktop\thewalk ciorna\joker.cpp
+1587933440 source:c:\users\mara\onedrive\desktop\thewalk ciorna\joker.cpp
 	"joker.h"
 	"robot.h"
 	"harta.h"
@@ -120,7 +120,7 @@
 	"robot.h"
 	<vector>
 
-1587927192 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robin.cpp
+1587931101 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robin.cpp
 	"robin.h"
 	"robot.h"
 	"harta.h"
@@ -135,7 +135,7 @@
 	"robot.h"
 	"harta.h"
 
-1587925880 source:c:\users\mara\onedrive\desktop\thewalk ciorna\harta.cpp
+1587938116 source:c:\users\mara\onedrive\desktop\thewalk ciorna\harta.cpp
 	"harta.h"
 	<iostream>
 	<new>

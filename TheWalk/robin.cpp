@@ -21,7 +21,7 @@ void robin::Move(harta &H)
 {
     int ok=0, dist[20][20];
     H.trigger(row,col,viz);
-    H.check(make_pair(row,col),viz, dist);
+    H.check(make_pair(row,col),viz);
 
     //retinem coordonatele itemurilor proprii din perimetrul vizibil
     for(int i=max(0,row-viz); i<min(H.n,row+viz+1); i++)

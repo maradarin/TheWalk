@@ -1,4 +1,3 @@
-
 #include "harta.h"
 #include <iostream>
 #include <new>
@@ -17,7 +16,6 @@ harta::harta()
 {
     n=0;
     m=0;
-    //numberRound=0;
 }
 
 harta::~harta()
@@ -25,6 +23,9 @@ harta::~harta()
     for (int i = 0; i < n; i++)
         delete[] matrix[i];
     delete[] matrix;
+    for (int i = 0; i < n; i++)
+        delete[] dist[i];
+    delete[] dist;
     n=0;
     m=0;
     numberItems=0;
@@ -155,6 +156,9 @@ istream & operator >> (istream & in, harta &H)
         H.matrix[x][y]='0'+z;                                   // Fiecare item corespunde unui tip de robot
     }
 
+    H.dist = new int*[H.n];
+    for (int i = 0; i < H.n; i++) H.dist[i] = new int[H.m];
+
     return in;
 }
 
@@ -258,9 +262,17 @@ void harta::Simulate(robot &A)
                 }
             }
         }
-        if(ok==0)
+        if(A.getVieti()==-100) cout<<"You lost yourself in the labyrinth and starved to death"<<endl;
+        else
         {
-            cout<<"You won at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
+            if(ok==0)
+            {
+                cout<<"You won at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
+            }
+            else
+            {
+                cout<<"You died at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
+            }
             cout<<"You have "<<A.getVieti()<<" lives left"<<endl;
             cout<<"You gathered "<<A.getItems1()<< " batman items"<<endl;
             cout<<"You gathered "<<A.getItems2()<< " robin items"<<endl;
@@ -271,7 +283,7 @@ void harta::Simulate(robot &A)
     }
 }
 
-bool harta::isValid(int x, int y, char c)
+bool harta::isValid(int x, int y, char c) const
 {
     if(c=='Z')
     {
@@ -289,7 +301,7 @@ bool harta::isValid(int x, int y, char c)
 
 }
 
-bool harta::findCoord(int a, int b)
+bool harta::findCoord(int a, int b) const
 {
     pair<int, int> p=make_pair(a,b);
     if(find(ZCoord.begin(), ZCoord.end(), p) != ZCoord.end()) return false;
@@ -315,7 +327,7 @@ void harta::trigger(int row, int col, int viz)
             }
 }
 
-void harta::check(pair<int,int> curr, int viz, int dist[20][20])
+void harta::check(pair<int,int> curr, int viz)
 {
     for(int i=max(0,curr.first-viz); i<min(n,curr.first+viz+1); i++)
     {
