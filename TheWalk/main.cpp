@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cctype>
 #include <string>
+#include <time.h>
 #include "harta.h"
 #include "robot.h"
 #include "batman.h"
@@ -13,6 +14,7 @@ int ok;
 
 int main()
 {
+    srand(time(NULL));
     harta H;
     int type,ok;
     cin>>H;

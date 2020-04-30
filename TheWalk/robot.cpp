@@ -1,22 +1,41 @@
 #include "robot.h"
 #include "harta.h"
+#include <cstring>
+
+int robot::vieti=4;
+int robot::countItems1=0;
+int robot::countItems2=0;
+int robot::countItems3=0;
+
+bool correct(char aux[], char c)
+{
+    if(strchr(aux,c)!=NULL) return true;
+    return false;
+}
 
 bool robot::isBlocked(int row, int col, harta& H)
 {
+    char obs[]="R@?!*S";
     if(row==0)
     {
-        if(H.getCell(row,col-1)=='R' && H.getCell(row+1,col-1)=='R' && H.getCell(row+1,col)=='R' && H.getCell(row+1,col+1)=='R' && H.getCell(row,col+1)=='R')
+        if(correct(obs,H.getCellm(row,col-1))==true && correct(obs,H.getCellm(row+1,col-1))==true &&
+           correct(obs,H.getCellm(row+1,col))==true && correct(obs,H.getCellm(row+1,col+1))==true &&
+           correct(obs,H.getCellm(row,col+1))==true)
             return true;
     }
     else if(col==0)
     {
-        if(H.getCell(row-1,col)=='R' && H.getCell(row-1,col+1)=='R' && H.getCell(row,col+1)=='R' && H.getCell(row+1,col+1)=='R' && H.getCell(row+1,col)=='R')
+        if(correct(obs,H.getCellm(row-1,col))==true && correct(obs,H.getCellm(row-1,col+1))==true &&
+           correct(obs,H.getCellm(row,col+1))==true && correct(obs,H.getCellm(row+1,col+1))==true &&
+           correct(obs,H.getCellm(row+1,col))==true)
             return true;
     }
     else
     {
-        if(H.getCell(row,col-1)=='R' && H.getCell(row+1,col-1)=='R' && H.getCell(row+1,col)=='R' && H.getCell(row+1,col+1)=='R' && H.getCell(row,col+1)=='R'
-           && H.getCell(row-1,col)=='R' && H.getCell(row-1,col+1)=='R' && H.getCell(row-1,col-1)=='R')
+        if(correct(obs,H.getCellm(row,col-1))==true && correct(obs,H.getCellm(row+1,col-1))==true &&
+           correct(obs,H.getCellm(row+1,col))==true && correct(obs,H.getCellm(row+1,col+1))==true &&
+           correct(obs,H.getCellm(row,col+1))==true && correct(obs,H.getCellm(row-1,col))==true &&
+           correct(obs,H.getCellm(row-1,col+1))==true && correct(obs,H.getCellm(row-1,col-1))==true)
             return true;
     }
     return false;

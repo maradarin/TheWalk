@@ -19,55 +19,55 @@ bool robin::findCoord(int a, int b)
 
 void robin::Move(harta &H)
 {
-    int ok=0, dist[20][20];
+    int ok=0;
     H.trigger(row,col,viz);
     H.check(make_pair(row,col),viz);
 
     //retinem coordonatele itemurilor proprii din perimetrul vizibil
     for(int i=max(0,row-viz); i<min(H.n,row+viz+1); i++)
         for(int j=max(0,col-viz); j<min(H.m,col+viz+1); j++)
-            if(dist[i][j]!=-1 && findCoord(i,j)==true && H.matrix[i][j]=='2') Coord2.push_back(make_pair(i,j));
+            if(H.dist[i][j]!=-1 && findCoord(i,j)==true && H.matrix[i][j]=='2') Coord2.push_back(make_pair(i,j));
 
     //cout<<Coord2.size()<<endl;
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
-        if(countItems2>0 && H.finish.first>row && H.finish.second>col && dist[row+1][col+1]!=-1)
+        if(countItems2>0 && H.finish.first>row && H.finish.second>col && H.dist[row+1][col+1]!=-1)
         {
             row++;
             col++;
             ok=1;
         }
-        else if(countItems2>0 && H.finish.first>row && H.finish.second<col && dist[row+1][col-1]!=-1 && col>=1)
+        else if(countItems2>0 && H.finish.first>row && H.finish.second<col && H.dist[row+1][col-1]!=-1 && col>=1)
         {
             row++;
             col--;
             ok=1;
         }
-        else if(countItems2>0 && H.finish.first<row && H.finish.second>col && dist[row-1][col+1]!=-1 && row>=1)
+        else if(countItems2>0 && H.finish.first<row && H.finish.second>col && H.dist[row-1][col+1]!=-1 && row>=1)
         {
             row--;
             col++;
             ok=1;
         }
-        else if (H.finish.first < row && dist[row-1][col]!=-1 && row>=1)
+        else if (H.finish.first < row && H.dist[row-1][col]!=-1 && row>=1)
         {
             row--;
             ok=1;
         }
-        else if (H.finish.first > row && dist[row+1][col]!=-1)
+        else if (H.finish.first > row && H.dist[row+1][col]!=-1)
         {
             row++;
             ok=1;
 
         }
-        else if (H.finish.second < col && dist[row][col-1]!=-1 && col>=1)
+        else if (H.finish.second < col && H.dist[row][col-1]!=-1 && col>=1)
         {
             col--;
             ok=1;
 
         }
-        else if (H.finish.second > col && dist[row][col+1]!=-1)
+        else if (H.finish.second > col && H.dist[row][col+1]!=-1)
         {
             col++;
             ok=1;
@@ -81,47 +81,47 @@ void robin::Move(harta &H)
         for(vector<pair<int,int> >::iterator it=Coord2.begin(); it!=Coord2.end() && ok==0; it++)
             if (abs(it->first - row) <= viz && abs(it->second - col) <= viz)
             {
-                if(countItems2>0 && it->first>row && it->second>col && dist[row+1][col+1]!=-1)
+                if(countItems2>0 && it->first>row && it->second>col && H.dist[row+1][col+1]!=-1)
                 {
                     row++;
                     col++;
                     ok=1;
                 }
-                else if(countItems2>0 && it->first>row && it->second<col && dist[row+1][col-1]!=-1 && col>=1)
+                else if(countItems2>0 && it->first>row && it->second<col && H.dist[row+1][col-1]!=-1 && col>=1)
                 {
                     row++;
                     col--;
                     ok=1;
                 }
-                else if(countItems2>0 && it->first<row && it->second>col && dist[row-1][col+1]!=-1 && row>=1)
+                else if(countItems2>0 && it->first<row && it->second>col && H.dist[row-1][col+1]!=-1 && row>=1)
                 {
                     row--;
                     col++;
                     ok=1;
                 }
-                else if (it->first < row && dist[row-1][col]!=-1 && row>=1)
+                else if (it->first < row && H.dist[row-1][col]!=-1 && row>=1)
                 {
                     row--;
                     ok=1;
                 }
-                else if (it->first > row && dist[row+1][col]!=-1)
+                else if (it->first > row && H.dist[row+1][col]!=-1)
                 {
                     row++;
                     ok=1;
                 }
-                else if (it->second < col && dist[row][col-1]!=-1 && col>=1)
+                else if (it->second < col && H.dist[row][col-1]!=-1 && col>=1)
                 {
                     col--;
                     ok=1;
                 }
-                else if (it->second > col && dist[row][col+1]!=-1)
+                else if (it->second > col && H.dist[row][col+1]!=-1)
                 {
                     col++;
                     ok=1;
                 }
 
                 // daca itemul este chiar inaccesibil, trecem printr-o capcana pt a-l obtine; facem exceptie la itemul de tip joker
-                else if(dist[row][col+1]==-1 && dist[row+1][col]==-1 && H.matrix[row][col+1]!='3' && H.matrix[row+1][col]!='3')
+                else if(H.dist[row][col+1]==-1 && H.dist[row+1][col]==-1 && H.matrix[row][col+1]!='3' && H.matrix[row+1][col]!='3')
                 {
                     col++;
                     ok=1;
@@ -144,40 +144,40 @@ void robin::Move(harta &H)
         }
         else
         {
-            if(countItems2>0 && H.finish.first>row && H.finish.second>col && dist[row+1][col+1]!=-1)
+            if(countItems2>0 && H.finish.first>row && H.finish.second>col && H.dist[row+1][col+1]!=-1)
             {
                 row++;
                 col++;
                 ok=1;
             }
-            else if(countItems2>0 && H.finish.first>row && H.finish.second<col && dist[row+1][col-1]!=-1 && col>=1)
+            else if(countItems2>0 && H.finish.first>row && H.finish.second<col && H.dist[row+1][col-1]!=-1 && col>=1)
             {
                 row++;
                 col--;
                 ok=1;
             }
-            else if(countItems2>0 && H.finish.first<row && H.finish.second>col && dist[row-1][col+1]!=-1 && row>=1)
+            else if(countItems2>0 && H.finish.first<row && H.finish.second>col && H.dist[row-1][col+1]!=-1 && row>=1)
             {
                 row--;
                 col++;
                 ok=1;
             }
-            else if(dist[row+1][col]!=-1)
+            else if(H.dist[row+1][col]!=-1)
             {
                 row++;
                 ok=1;
             }
-            else if(dist[row][col+1]!=-1)
+            else if(H.dist[row][col+1]!=-1)
             {
                 col++;
                 ok=1;
             }
-            else if(dist[row][col-1]!=-1 && col>=1)
+            else if(H.dist[row][col-1]!=-1 && col>=1)
             {
                 col--;
                 ok=1;
             }
-            else if(dist[row-1][col]!=-1 && row>=1)
+            else if(H.dist[row-1][col]!=-1 && row>=1)
             {
                 row--;
                 ok=1;
@@ -187,7 +187,7 @@ void robin::Move(harta &H)
 
     if(ok==0)
     {
-        if(countItems2>1 && countItems1>0)    // item 1+2 = imunitate la senzori
+        if(countItems2>0 && countItems1>0)    // item 1+2 = imunitate la senzori
         {
             if(H.matrix[row+1][col]=='Z')
             {
