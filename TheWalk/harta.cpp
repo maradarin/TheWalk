@@ -158,7 +158,7 @@ istream & operator >> (istream & in, harta &H)
             z = rand() % 3 + 1;                                 //Itemuri de 3 tipuri (reprezentate cu 1,2,3 pe harta)
             if(H.matrix[x][y]=='_')
             {
-                if(z==3 && !(x==1 && y==0))
+                if((z==3 && !(x==1 && y==0)) || z==1 || z==2)
                 {
                     ok1=1;
                     break;
