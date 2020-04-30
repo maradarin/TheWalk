@@ -22,7 +22,6 @@ void batman::Move(harta &H)
         {
             if(H.dist[row-1][col]!=-1)
             {
-                cout<<"f1"<<endl;
                 row--;
                 ok=1;
             }
@@ -31,7 +30,6 @@ void batman::Move(harta &H)
         {
             if(H.dist[row+1][col]!=-1)
             {
-                cout<<"f2"<<endl;
                 row++;
                 ok=1;
             }
@@ -40,7 +38,6 @@ void batman::Move(harta &H)
         {
             if(H.dist[row][col-1]!=-1)
             {
-                cout<<"f3"<<endl;
                 col--;
                 ok=1;
             }
@@ -49,7 +46,6 @@ void batman::Move(harta &H)
         {
             if(H.dist[row][col+1]!=-1)
             {
-                cout<<"f4"<<endl;
                 col++;
                 ok=1;
             }
@@ -62,7 +58,6 @@ void batman::Move(harta &H)
             if((H.matrix[0][col+1]=='_' || H.matrix[0][col+1]=='1' || H.matrix[0][col+1]=='2') ||
                (countItems1>0 && countItems2>0) || (countItems1>0 && H.matrix[0][col+1]=='X'))
             {
-                cout<<"urm col"<<endl;
                 row=0;
                 col++;
                 ok=1;
@@ -75,7 +70,6 @@ void batman::Move(harta &H)
             if((H.matrix[row+1][0]=='_' || H.matrix[row+1][0]=='1' || H.matrix[row+1][0]=='2') ||
                (countItems1>0 && countItems2>0) || (countItems1>0 && H.matrix[row+1][0]=='X'))
             {
-                cout<<"urm linie"<<endl;
                 row++;
                 col=0;
                 ok=1;
@@ -87,25 +81,21 @@ void batman::Move(harta &H)
         {
             if(H.dist[row+1][col]!=-1)
             {
-                cout<<"liber1"<<endl;
                 row++;
                 ok=1;
             }
             else if(H.dist[row][col+1]!=-1)
             {
-                cout<<"liber2"<<endl;
                 col++;
                 ok=1;
             }
             else if(H.dist[row][col-1]!=-1 && col>=1)
             {
-                cout<<"liber3"<<endl;
                 col--;
                 ok=1;
             }
             else if(H.dist[row-1][col]!=-1 && row>=1)
             {
-                cout<<"liber4"<<endl;
                 row--;
                 ok=1;
             }
@@ -125,13 +115,11 @@ void batman::Move(harta &H)
         {
             if(H.matrix[row+1][col]=='Z')
             {
-                cout<<"z evitat1"<<endl;
                 row++;
                 ok=1;
             }
             else if(H.matrix[row][col+1]=='Z')
             {
-                cout<<"z evitat2"<<endl;
                 col++;
                 ok=1;
             }
@@ -151,25 +139,21 @@ void batman::Move(harta &H)
 
         if(H.matrix[row+1][col]=='X')
         {
-            cout<<"x1"<<endl;
             row++;
             ok=1;
         }
         else if(H.matrix[row][col+1]=='X')
         {
-            cout<<"x2"<<endl;
             col++;
             ok=1;
         }
         else if(H.matrix[row][col-1]=='X' && col>=1)
         {
-            cout<<"x3"<<endl;
             col--;
             ok=1;
         }
         else if(H.matrix[row-1][col]=='X' && row>=1)
         {
-            cout<<"x4"<<endl;
             row--;
             ok=1;
         }
@@ -196,13 +180,11 @@ void batman::Move(harta &H)
         {
             if(H.matrix[row+1][col]=='3')
             {
-                cout<<"3 evitat 1"<<endl;
                 row++;
                 ok=1;
             }
             else if(H.matrix[row][col+1]=='3')
             {
-                cout<<"3 evitat 2"<<endl;
                 col++;
                 ok=1;
             }
@@ -213,25 +195,21 @@ void batman::Move(harta &H)
     {
         if(H.matrix[row+1][col]=='Z')
         {
-            cout<<"z1"<<endl;
             row++;
             ok=1;
         }
         else if(H.matrix[row][col+1]=='Z')
         {
-            cout<<"z2"<<endl;
             col++;
             ok=1;
         }
         else if(H.matrix[row][col-1]=='Z' && col>=1)
         {
-            cout<<"z3"<<endl;
             col--;
             ok=1;
         }
         else if(H.matrix[row-1][col]=='Z' && row>=1)
         {
-            cout<<"z4"<<endl;
             row--;
             ok=1;
         }
@@ -247,31 +225,26 @@ void batman::Move(harta &H)
     {
         if(H.matrix[row+1][col]=='3')
         {
-            cout<<"3.1"<<endl;
             row++;
             ok=1;
         }
         else if(H.matrix[row][col+1]=='3')
         {
-            cout<<"3.2"<<endl;
             col++;
             ok=1;
         }
         else if(H.matrix[row][col-1]=='3' && col>=1)
         {
-            cout<<"3.3"<<endl;
             col--;
             ok=1;
         }
         else if(H.matrix[row-1][col]=='3' && row>=1)
         {
-            cout<<"3.4"<<endl;
             row--;
             ok=1;
         }
     }
     if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
-    cout<<"am ales "<<row<< " "<<col<<endl;
     EffectItem(row,col,H);
     if(isBlocked(row,col,H)==true) vieti=-100;
 }
