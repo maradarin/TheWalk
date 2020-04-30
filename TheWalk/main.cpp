@@ -1,8 +1,8 @@
 #include <iostream>
 #include <algorithm>
 #include <cctype>
-#include <time.h>
 #include <string>
+#include <time.h>
 #include "harta.h"
 #include "robot.h"
 #include "batman.h"

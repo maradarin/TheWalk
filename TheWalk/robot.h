@@ -4,22 +4,21 @@
 using namespace std;
 
 
-class harta;                                          //declarare tip "forward"
-class robot                                           //clasa abstracta
+class harta;
+class robot                                                 //clasa abstracta
 {
 protected:
     int row,col,viz;
-    int vieti,countItems1,countItems2,countItems3;
+    static int vieti,countItems1,countItems2,countItems3;
 public:
-    robot():row(0),col(0),viz(2),vieti(4),countItems1(0),countItems2(0),countItems3(0) {}
+    //friend class harta;
+    robot():row(0),col(0),viz(2) {}
     int getRow() {return row;}
     int getCol() {return col;}
     int getVieti() {return vieti;}
-    int getViz() {return viz;}
-    int getItems1() {return countItems1;}
-    int getItems2() {return countItems2;}
-    int getItems3() {return countItems3;}
+
     bool isBlocked(int, int, harta&);                //functie care verifica daca un robot a ramas blocat pe harta
+    void stats();
     virtual void Move(harta&)=0;                     //metoda virtual pura de deplasare a robotuluii
     virtual void EffectItem(int, int, harta&)=0;     //metoda virtual pura de folosire a itemului
     //~robot();

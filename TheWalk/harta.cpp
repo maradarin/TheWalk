@@ -1,3 +1,4 @@
+
 #include "harta.h"
 #include <iostream>
 #include <new>
@@ -23,9 +24,11 @@ harta::~harta()
     for (int i = 0; i < n; i++)
         delete[] matrix[i];
     delete[] matrix;
+
     for (int i = 0; i < n; i++)
         delete[] dist[i];
     delete[] dist;
+
     n=0;
     m=0;
     numberItems=0;
@@ -36,9 +39,14 @@ harta::~harta()
     ZCoord.clear();
 }
 
-char harta::getCell(int row, int col)
+char harta::getCellm(int row, int col)
 {
     return matrix[row][col];
+}
+
+pair<int,int> harta::getDim()
+{
+    return make_pair(n,m);
 }
 
 istream & operator >> (istream & in, harta &H)
@@ -101,26 +109,6 @@ istream & operator >> (istream & in, harta &H)
         }
     }
     H.finish=make_pair(aux.first,aux.second);
-    /*in>>H.n>>H.m;
-    try
-    {
-        H.matrix = new char*[H.n];
-    }
-    catch (bad_alloc)
-    {
-        cout << "Eroare la initializarea matricei";
-    }
-    for (int i = 0; i < H.n; i++)
-    {
-        try
-        {
-            H.matrix[i] = new char[H.m];
-        }
-        catch (bad_alloc)
-        {
-            cout << "Eroare la initializarea matricei";
-        }
-    }*/
 
     for (int i = 0; i < H.n; i++)
         for (int j = 0; j < H.m; j++)
@@ -179,11 +167,6 @@ istream & operator >> (istream & in, harta &H)
         }
         H.matrix[x][y]='0'+z;                                   // Fiecare item corespunde unui tip de robot
     }
-    /*in>>H.finish.first>>H.finish.second;
-    for(int i=0;i<H.n;i++)
-        for(int j=0;j<H.m;j++)
-        in>>H.matrix[i][j];*/
-
 
     H.dist = new int*[H.n];
     for (int i = 0; i < H.n; i++) H.dist[i] = new int[H.m];
@@ -197,7 +180,11 @@ ostream & operator <<(ostream & out,const harta &H)
     for(int i=0; i<H.n; i++)
     {
         for(int j=0; j<H.m; j++)
-            cout<<H.matrix[i][j]<<" ";
+        //{
+            //if(i>=max(0,row-viz) && i<min(n,row+viz+1) && j>=max(0,col-viz) && j<min(m,col+viz+1)) cout<<H.matrix[i][j]<<" ";
+            //else cout<<char(178)<<" ";
+        //}
+        cout<<H.matrix[i][j]<<" ";
         cout<<"\n";
     }
     return out;
@@ -217,15 +204,11 @@ void harta::Simulate(robot &A)
     if(aut=='Y' || aut=='y')
     {
         int ok=0;
-        while(!(A.getRow()==finish.first && A.getCol()==finish.second) && A.getVieti()>0 && ok==0 && numberRound<=100)
+        while(!(A.getRow()==finish.first && A.getCol()==finish.second) && A.getVieti()>0 && ok==0)
         {
             cout<<"Round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
             cout<<"STATS: "<<endl;
-            cout<<"You have "<<A.getVieti()<<" lives left"<<endl;
-            cout<<"You have "<<A.getViz()<<" points of visibility"<<endl;
-            cout<<"You gathered "<<A.getItems1()<< " batman items"<<endl;
-            cout<<"You gathered "<<A.getItems2()<< " robin items"<<endl;
-            cout<<"You gathered "<<A.getItems3()<< " joker items"<<endl;
+            A.stats();
             cout<<*this<<endl;
             A.Move(*this);                                                  //mutam robotul pe harta
             breakline();
@@ -243,10 +226,7 @@ void harta::Simulate(robot &A)
             {
                 cout<<"You died at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
             }
-            cout<<"You have "<<A.getVieti()<<" lives left"<<endl;
-            cout<<"You gathered "<<A.getItems1()<< " batman items"<<endl;
-            cout<<"You gathered "<<A.getItems2()<< " robin items"<<endl;
-            cout<<"You gathered "<<A.getItems3()<< " joker items"<<endl;
+            A.stats();
             cout<<*this<<endl;
             breakline();
         }
@@ -259,11 +239,7 @@ void harta::Simulate(robot &A)
         {
             cout<<"Round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
             cout<<"STATS: "<<endl;
-            cout<<"You have "<<A.getVieti()<<" lives left"<<endl;
-            cout<<"You have "<<A.getViz()<<" points of visibility"<<endl;
-            cout<<"You gathered "<<A.getItems1()<< " batman items"<<endl;
-            cout<<"You gathered "<<A.getItems2()<< " robin items"<<endl;
-            cout<<"You gathered "<<A.getItems3()<< " joker items"<<endl;
+            A.stats();
             cout<<*this<<endl;
             A.Move(*this);                                                  //mutam robotul pe harta
             breakline();
@@ -291,28 +267,15 @@ void harta::Simulate(robot &A)
                 }
             }
         }
-        if(A.getVieti()==-100) cout<<"You lost yourself in the labyrinth and starved to death"<<endl;
-        else
+        if(ok==0)
         {
-            if(ok==0)
-            {
-                cout<<"You won at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
-            }
-            else
-            {
-                cout<<"You died at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
-            }
-            cout<<"You have "<<A.getVieti()<<" lives left"<<endl;
-            cout<<"You gathered "<<A.getItems1()<< " batman items"<<endl;
-            cout<<"You gathered "<<A.getItems2()<< " robin items"<<endl;
-            cout<<"You gathered "<<A.getItems3()<< " joker items"<<endl;
-            cout<<*this<<endl;
-            breakline();
+            cout<<"You won at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
+            A.stats();
         }
     }
 }
 
-bool harta::isValid(int x, int y, char c) const
+bool harta::isValid(int x, int y, char c)
 {
     if(c=='Z')
     {
@@ -330,7 +293,7 @@ bool harta::isValid(int x, int y, char c) const
 
 }
 
-bool harta::findCoord(int a, int b) const
+bool harta::findCoord(int a, int b)
 {
     pair<int, int> p=make_pair(a,b);
     if(find(ZCoord.begin(), ZCoord.end(), p) != ZCoord.end()) return false;
@@ -339,7 +302,6 @@ bool harta::findCoord(int a, int b) const
 
 void harta::trigger(int row, int col, int viz)
 {
-    cout<<"OKTRIGGER"<<endl;
     int rowNum[] = { -1, 0, 0, 1 };
     int colNum[] = { 0, -1, 1, 0 };
     for(int i=max(0,row-viz); i<min(1+row+viz,n); i++)                    //avand vizibilitatea de viz, verificam in avans posibilitatea
@@ -359,7 +321,10 @@ void harta::trigger(int row, int col, int viz)
 
 void harta::check(pair<int,int> curr, int viz)
 {
-    cout<<"OKCHECK"<<endl;
+    dist = new int*[n];
+    for (int i = 0; i < n; i++)
+        dist[i] = new int[m];
+
     for(int i=max(0,curr.first-viz); i<min(n,curr.first+viz+1); i++)
     {
         for(int j=max(0,curr.second-viz); j<min(m,curr.second+viz+1); j++)
@@ -392,4 +357,3 @@ void harta::check(pair<int,int> curr, int viz)
         }
     }
 }
-
