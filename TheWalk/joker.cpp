@@ -75,7 +75,7 @@ void joker::Move(harta &H)
 }
 
 
-void joker::EffectItem(int x, int y, harta &H)
+void joker::EffectItem(const int x, const int y, harta &H)
 {
     char *message =new char[1000];
     message[0]='\0';

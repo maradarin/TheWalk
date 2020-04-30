@@ -9,9 +9,9 @@ class robin : public robot
     vector<pair<int,int> > Coord2;
 public:
     void Move(harta&);                         //Robot2 se deplaseaza pe coloane
-    void EffectItem(int, int, harta&);
-    bool findCoord(int, int);
-    //virtual ~robin();
+    void EffectItem(const int, const int, harta&);
+    bool findCoord(const int, const int) const;
+    virtual ~robin() {};
 };
 
 #endif //_ROBIN_H_

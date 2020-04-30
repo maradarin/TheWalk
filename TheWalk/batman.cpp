@@ -19,7 +19,6 @@ void batman::Move(harta &H)
     {
         if (H.finish.first < row && row>=1)
         {
-            if(H.dist[row-1][col]!=-1)
             {
                 row--;
                 ok=1;
@@ -216,11 +215,11 @@ void batman::Move(harta &H)
         if(ok==1)
         {
             vieti-=2;
-            H.matrix[row][col]='*';               //Semn specific pt senzor alertat
-        }                                         
+            H.matrix[row][col]='*';
+        }                                         //Semn specific pt senzor alertat
     }
 
-    if(ok==0)                                     //Ultima solutie ramasa: itemul de tip joker
+    if(ok==0)                                                            //Ultima solutie ramasa: itemul de tip joker (sau casuta deja vizitata???)
     {
         if(H.matrix[row+1][col]=='3')
         {
@@ -249,7 +248,7 @@ void batman::Move(harta &H)
 }
 
 
-void batman::EffectItem(int x, int y, harta &H)
+void batman::EffectItem(const int x, const int y, harta &H)
 {
     char *message =new char[1000];
     message[0]='\0';

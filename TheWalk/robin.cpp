@@ -9,7 +9,7 @@
 #include <algorithm>
 
 
-bool robin::findCoord(int a, int b)
+bool robin::findCoord(const int a, const int b) const
 {
     pair<int, int> p=make_pair(a,b);
     if(find(Coord2.begin(), Coord2.end(), p) != Coord2.end()) return false;
@@ -19,6 +19,7 @@ bool robin::findCoord(int a, int b)
 
 void robin::Move(harta &H)
 {
+    EffectItem(row,col,H);
     int ok=0;
     H.trigger(row,col,viz);
     H.check(make_pair(row,col),viz);
@@ -301,12 +302,11 @@ void robin::Move(harta &H)
         }
     }
     if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
-    EffectItem(row,col,H);
     if(isBlocked(row,col,H)==true) vieti=-100;
 }
 
 
-void robin::EffectItem(int x, int y, harta &H)
+void robin::EffectItem(const int x, const int y, harta &H)
 {
     char *message =new char[1000];
     message[0]='\0';

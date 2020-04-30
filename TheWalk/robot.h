@@ -11,17 +11,16 @@ protected:
     int row,col,viz;
     static int vieti,countItems1,countItems2,countItems3;
 public:
-    //friend class harta;
     robot():row(0),col(0),viz(2) {}
-    int getRow() {return row;}
-    int getCol() {return col;}
-    int getVieti() {return vieti;}
+    int getRow() const {return row;}
+    int getCol() const {return col;}
+    int getVieti() const {return vieti;}
 
-    bool isBlocked(int, int, harta&);                //functie care verifica daca un robot a ramas blocat pe harta
+    bool isBlocked(const int, const int, harta&) const;            //functie care verifica daca un robot a ramas blocat pe harta
     void stats();
-    virtual void Move(harta&)=0;                     //metoda virtual pura de deplasare a robotuluii
-    virtual void EffectItem(int, int, harta&)=0;     //metoda virtual pura de folosire a itemului
-    //~robot();
+    virtual void Move(harta&)=0;                                   //metoda virtual pura de deplasare a robotuluii
+    virtual void EffectItem(const int, const int, harta&)=0;       //metoda virtual pura de folosire a itemului
+    virtual ~robot() {};
 };
 
 //int robot::numberLives=4;
