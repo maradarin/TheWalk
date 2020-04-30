@@ -28,7 +28,6 @@ void robin::Move(harta &H)
         for(int j=max(0,col-viz); j<min(H.m,col+viz+1); j++)
             if(H.dist[i][j]!=-1 && findCoord(i,j)==true && H.matrix[i][j]=='2') Coord2.push_back(make_pair(i,j));
 
-    //cout<<Coord2.size()<<endl;
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
@@ -187,7 +186,7 @@ void robin::Move(harta &H)
 
     if(ok==0)
     {
-        if(countItems2>0 && countItems1>0)    // item 1+2 = imunitate la senzori
+        if(countItems2>1 && countItems1>0)    // item 1+2 = imunitate la senzori
         {
             if(H.matrix[row+1][col]=='Z')
             {
@@ -213,7 +212,6 @@ void robin::Move(harta &H)
         }
     }
 
-
     if(ok==0)   //Nu putem sa ne mutam pe orizontala (alta coloana) si nici nu vrem sa revenim la pozitia anterioara
     {
         //Cel mai acceptabil compromis: trecem prin capcana
@@ -237,7 +235,6 @@ void robin::Move(harta &H)
             row--;
             ok=1;
         }
-
         if(ok==1)
         {
             vieti--;

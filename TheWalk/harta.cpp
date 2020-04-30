@@ -1,4 +1,3 @@
-
 #include "harta.h"
 #include <iostream>
 #include <new>
@@ -24,11 +23,9 @@ harta::~harta()
     for (int i = 0; i < n; i++)
         delete[] matrix[i];
     delete[] matrix;
-
     for (int i = 0; i < n; i++)
         delete[] dist[i];
     delete[] dist;
-
     n=0;
     m=0;
     numberItems=0;
@@ -39,14 +36,9 @@ harta::~harta()
     ZCoord.clear();
 }
 
-char harta::getCellm(int row, int col)
+char harta::getCell(int row, int col)
 {
     return matrix[row][col];
-}
-
-int harta::getCelld(int row, int col)
-{
-    return dist[row][col];
 }
 
 istream & operator >> (istream & in, harta &H)
@@ -77,6 +69,25 @@ istream & operator >> (istream & in, harta &H)
         else stop=1;
     }
     cout<<endl;
+    try
+    {
+        H.matrix = new char*[H.n];
+    }
+    catch (bad_alloc)
+    {
+        cout << "Eroare la initializarea matricei";
+    }
+    for (int i = 0; i < H.n; i++)
+    {
+        try
+        {
+            H.matrix[i] = new char[H.m];
+        }
+        catch (bad_alloc)
+        {
+            cout << "Eroare la initializarea matricei";
+        }
+    }
     int ok=0;
     pair<int,int> aux(0,0);
     while(ok==0)
@@ -90,10 +101,26 @@ istream & operator >> (istream & in, harta &H)
         }
     }
     H.finish=make_pair(aux.first,aux.second);
-
-    H.matrix = new char*[H.n];
+    /*in>>H.n>>H.m;
+    try
+    {
+        H.matrix = new char*[H.n];
+    }
+    catch (bad_alloc)
+    {
+        cout << "Eroare la initializarea matricei";
+    }
     for (int i = 0; i < H.n; i++)
-        H.matrix[i] = new char[H.m];
+    {
+        try
+        {
+            H.matrix[i] = new char[H.m];
+        }
+        catch (bad_alloc)
+        {
+            cout << "Eroare la initializarea matricei";
+        }
+    }*/
 
     for (int i = 0; i < H.n; i++)
         for (int j = 0; j < H.m; j++)
@@ -103,7 +130,7 @@ istream & operator >> (istream & in, harta &H)
     H.numberSensors=H.m;
     H.matrix[0][0]='S';
     H.matrix[H.finish.first][H.finish.second]='F';
-    for(int i=1; i<=H.numberTraps; i++)                         //Generare aleatoare a bombelor
+    for(int i=1; i<=H.numberTraps; i++)                         //Generare aleatoare a capcanelor
     {
         int x=0,y=0,ok1=0;
         while(ok1==0)
@@ -118,7 +145,7 @@ istream & operator >> (istream & in, harta &H)
         }
         H.matrix[x][y]='X';
     }
-    for(int i=1; i<=H.numberSensors; i++)                        //Generare aleatoare a senzorilor
+    for(int i=1; i<=H.numberSensors; i++)                        //Generare aleatoare a capcanelor
     {
         int x=0,y=0,ok1=0;
         while(ok1==0)
@@ -144,12 +171,22 @@ istream & operator >> (istream & in, harta &H)
             if(H.matrix[x][y]=='_')
             {
                 if(z==3 && !(x==1 && y==0))
-                ok1=1;
-                break;
+                {
+                    ok1=1;
+                    break;
+                }
             }
         }
         H.matrix[x][y]='0'+z;                                   // Fiecare item corespunde unui tip de robot
     }
+    /*in>>H.finish.first>>H.finish.second;
+    for(int i=0;i<H.n;i++)
+        for(int j=0;j<H.m;j++)
+        in>>H.matrix[i][j];*/
+
+
+    H.dist = new int*[H.n];
+    for (int i = 0; i < H.n; i++) H.dist[i] = new int[H.m];
 
     return in;
 }
@@ -180,7 +217,7 @@ void harta::Simulate(robot &A)
     if(aut=='Y' || aut=='y')
     {
         int ok=0;
-        while(!(A.getRow()==finish.first && A.getCol()==finish.second) && A.getVieti()>0 && ok==0)
+        while(!(A.getRow()==finish.first && A.getCol()==finish.second) && A.getVieti()>0 && ok==0 && numberRound<=100)
         {
             cout<<"Round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
             cout<<"STATS: "<<endl;
@@ -254,9 +291,17 @@ void harta::Simulate(robot &A)
                 }
             }
         }
-        if(ok==0)
+        if(A.getVieti()==-100) cout<<"You lost yourself in the labyrinth and starved to death"<<endl;
+        else
         {
-            cout<<"You won at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
+            if(ok==0)
+            {
+                cout<<"You won at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
+            }
+            else
+            {
+                cout<<"You died at round: "<<numberRound<<" coordinates "<<A.getRow()<<" "<<A.getCol()<<endl;
+            }
             cout<<"You have "<<A.getVieti()<<" lives left"<<endl;
             cout<<"You gathered "<<A.getItems1()<< " batman items"<<endl;
             cout<<"You gathered "<<A.getItems2()<< " robin items"<<endl;
@@ -267,7 +312,7 @@ void harta::Simulate(robot &A)
     }
 }
 
-bool harta::isValid(int x, int y, char c)
+bool harta::isValid(int x, int y, char c) const
 {
     if(c=='Z')
     {
@@ -285,7 +330,7 @@ bool harta::isValid(int x, int y, char c)
 
 }
 
-bool harta::findCoord(int a, int b)
+bool harta::findCoord(int a, int b) const
 {
     pair<int, int> p=make_pair(a,b);
     if(find(ZCoord.begin(), ZCoord.end(), p) != ZCoord.end()) return false;
@@ -294,6 +339,7 @@ bool harta::findCoord(int a, int b)
 
 void harta::trigger(int row, int col, int viz)
 {
+    cout<<"OKTRIGGER"<<endl;
     int rowNum[] = { -1, 0, 0, 1 };
     int colNum[] = { 0, -1, 1, 0 };
     for(int i=max(0,row-viz); i<min(1+row+viz,n); i++)                    //avand vizibilitatea de viz, verificam in avans posibilitatea
@@ -313,10 +359,7 @@ void harta::trigger(int row, int col, int viz)
 
 void harta::check(pair<int,int> curr, int viz)
 {
-    dist = new int*[n];
-    for (int i = 0; i < n; i++)
-        dist[i] = new int[m];
-
+    cout<<"OKCHECK"<<endl;
     for(int i=max(0,curr.first-viz); i<min(n,curr.first+viz+1); i++)
     {
         for(int j=max(0,curr.second-viz); j<min(m,curr.second+viz+1); j++)

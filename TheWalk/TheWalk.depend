@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1588250951 source:c:\users\mara\onedrive\desktop\thewalk\batman.cpp
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\batman.cpp
 	"batman.h"
 	"robot.h"
 	"harta.h"
@@ -9,17 +9,17 @@
 	<utility>
 	<algorithm>
 
-1588248822 c:\users\mara\onedrive\desktop\thewalk\batman.h
+1587548615 c:\users\mara\onedrive\desktop\thewalk\batman.h
 	"robot.h"
 
-1588249045 c:\users\mara\onedrive\desktop\thewalk\robot.h
+1587548615 c:\users\mara\onedrive\desktop\thewalk\robot.h
 	<iostream>
 
-1588248822 c:\users\mara\onedrive\desktop\thewalk\harta.h
+1587548615 c:\users\mara\onedrive\desktop\thewalk\harta.h
 	<fstream>
 	<vector>
 
-1588249004 source:c:\users\mara\onedrive\desktop\thewalk\harta.cpp
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\harta.cpp
 	"harta.h"
 	<iostream>
 	<new>
@@ -30,7 +30,7 @@
 	<vector>
 	<queue>
 
-1588247436 source:c:\users\mara\onedrive\desktop\thewalk\joker.cpp
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\joker.cpp
 	"joker.h"
 	"robot.h"
 	"harta.h"
@@ -40,26 +40,25 @@
 	<utility>
 	<algorithm>
 
-1588248822 c:\users\mara\onedrive\desktop\thewalk\joker.h
+1587548615 c:\users\mara\onedrive\desktop\thewalk\joker.h
 	"robot.h"
 
-1588248822 source:c:\users\mara\onedrive\desktop\thewalk\main.cpp
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\main.cpp
 	<iostream>
 	<algorithm>
 	<cctype>
 	<string>
-	<time.h>
 	"harta.h"
 	"robot.h"
 	"batman.h"
 	"robin.h"
 	"joker.h"
 
-1588248822 c:\users\mara\onedrive\desktop\thewalk\robin.h
+1587548616 c:\users\mara\onedrive\desktop\thewalk\robin.h
 	"robot.h"
 	<vector>
 
-1588248822 source:c:\users\mara\onedrive\desktop\thewalk\robin.cpp
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\robin.cpp
 	"robin.h"
 	"robot.h"
 	"harta.h"
@@ -70,12 +69,10 @@
 	<vector>
 	<algorithm>
 
-1588249026 source:c:\users\mara\onedrive\desktop\thewalk\robot.cpp
+1587548615 source:c:\users\mara\onedrive\desktop\thewalk\robot.cpp
 	"robot.h"
-	"harta.h"
-	<cstring>
 
-1587927192 source:c:\users\mara\onedrive\desktop\thewalk ciorna\batman.cpp
+1588198785 source:c:\users\mara\onedrive\desktop\thewalk ciorna\batman.cpp
 	"batman.h"
 	"robot.h"
 	"harta.h"
@@ -88,14 +85,14 @@
 1587927192 c:\users\mara\onedrive\desktop\thewalk ciorna\batman.h
 	"robot.h"
 
-1587926532 c:\users\mara\onedrive\desktop\thewalk ciorna\robot.h
+1587933121 c:\users\mara\onedrive\desktop\thewalk ciorna\robot.h
 	<iostream>
 
-1587925221 c:\users\mara\onedrive\desktop\thewalk ciorna\harta.h
+1588193377 c:\users\mara\onedrive\desktop\thewalk ciorna\harta.h
 	<fstream>
 	<vector>
 
-1587923107 source:c:\users\mara\onedrive\desktop\thewalk ciorna\joker.cpp
+1587938172 source:c:\users\mara\onedrive\desktop\thewalk ciorna\joker.cpp
 	"joker.h"
 	"robot.h"
 	"harta.h"
@@ -108,10 +105,11 @@
 1587908279 c:\users\mara\onedrive\desktop\thewalk ciorna\joker.h
 	"robot.h"
 
-1587906935 source:c:\users\mara\onedrive\desktop\thewalk ciorna\main.cpp
+1588193529 source:c:\users\mara\onedrive\desktop\thewalk ciorna\main.cpp
 	<iostream>
 	<algorithm>
 	<cctype>
+	<time.h>
 	<string>
 	"harta.h"
 	"robot.h"
@@ -123,7 +121,7 @@
 	"robot.h"
 	<vector>
 
-1587927192 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robin.cpp
+1588193337 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robin.cpp
 	"robin.h"
 	"robot.h"
 	"harta.h"
@@ -134,42 +132,12 @@
 	<vector>
 	<algorithm>
 
-1587926532 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robot.cpp
-	"robot.h"
-	"harta.h"
-
-1587925880 source:c:\users\mara\onedrive\desktop\thewalk ciorna\harta.cpp
-	"harta.h"
-	<iostream>
-	<new>
-	<cstdlib>
-	"robot.h"
-	<utility>
-	<algorithm>
-	<vector>
-	<queue>
-
-1587927192 source:c:\users\mara\onedrive\desktop\facultate\poo\thewalk\batman.cpp
-	"batman.h"
+1588200350 source:c:\users\mara\onedrive\desktop\thewalk ciorna\robot.cpp
 	"robot.h"
 	"harta.h"
 	<cstring>
-	<cstdlib>
-	<cmath>
-	<utility>
-	<algorithm>
 
-1587927192 c:\users\mara\onedrive\desktop\facultate\poo\thewalk\batman.h
-	"robot.h"
-
-1587926532 c:\users\mara\onedrive\desktop\facultate\poo\thewalk\robot.h
-	<iostream>
-
-1587925221 c:\users\mara\onedrive\desktop\facultate\poo\thewalk\harta.h
-	<fstream>
-	<vector>
-
-1587925880 source:c:\users\mara\onedrive\desktop\facultate\poo\thewalk\harta.cpp
+1588198526 source:c:\users\mara\onedrive\desktop\thewalk ciorna\harta.cpp
 	"harta.h"
 	<iostream>
 	<new>
@@ -180,7 +148,25 @@
 	<vector>
 	<queue>
 
-1587923107 source:c:\users\mara\onedrive\desktop\facultate\poo\thewalk\joker.cpp
+1588201204 source:c:\users\mara\onedrive\desktop\thewalk ciorna - copy\harta.cpp
+	"harta.h"
+	<iostream>
+	<new>
+	<cstdlib>
+	"robot.h"
+	<utility>
+	<algorithm>
+	<vector>
+	<queue>
+
+1588201122 c:\users\mara\onedrive\desktop\thewalk ciorna - copy\harta.h
+	<fstream>
+	<vector>
+
+1588201175 c:\users\mara\onedrive\desktop\thewalk ciorna - copy\robot.h
+	<iostream>
+
+1587938172 source:c:\users\mara\onedrive\desktop\thewalk ciorna - copy\joker.cpp
 	"joker.h"
 	"robot.h"
 	"harta.h"
@@ -190,13 +176,14 @@
 	<utility>
 	<algorithm>
 
-1587908279 c:\users\mara\onedrive\desktop\facultate\poo\thewalk\joker.h
+1587908279 c:\users\mara\onedrive\desktop\thewalk ciorna - copy\joker.h
 	"robot.h"
 
-1587906935 source:c:\users\mara\onedrive\desktop\facultate\poo\thewalk\main.cpp
+1588193529 source:c:\users\mara\onedrive\desktop\thewalk ciorna - copy\main.cpp
 	<iostream>
 	<algorithm>
 	<cctype>
+	<time.h>
 	<string>
 	"harta.h"
 	"robot.h"
@@ -204,11 +191,29 @@
 	"robin.h"
 	"joker.h"
 
-1587927192 c:\users\mara\onedrive\desktop\facultate\poo\thewalk\robin.h
+1587927192 c:\users\mara\onedrive\desktop\thewalk ciorna - copy\batman.h
+	"robot.h"
+
+1587927192 c:\users\mara\onedrive\desktop\thewalk ciorna - copy\robin.h
 	"robot.h"
 	<vector>
 
-1587927192 source:c:\users\mara\onedrive\desktop\facultate\poo\thewalk\robin.cpp
+1588202443 source:c:\users\mara\onedrive\desktop\thewalk ciorna - copy\robot.cpp
+	"robot.h"
+	"harta.h"
+	<cstring>
+
+1588202873 source:c:\users\mara\onedrive\desktop\thewalk ciorna - copy\batman.cpp
+	"batman.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<algorithm>
+
+1588201122 source:c:\users\mara\onedrive\desktop\thewalk ciorna - copy\robin.cpp
 	"robin.h"
 	"robot.h"
 	"harta.h"
@@ -218,20 +223,4 @@
 	<utility>
 	<vector>
 	<algorithm>
-
-1587926532 source:c:\users\mara\onedrive\desktop\facultate\poo\thewalk\robot.cpp
-	"robot.h"
-	"harta.h"
-
-1588246020 source:c:\users\mara\onedrive\desktop\thewalk\item.cpp
-	"item.h"
-
-1588246020 c:\users\mara\onedrive\desktop\thewalk\item.h
-	<iostream>
-
-1588244926 source:c:\users\mara\onedrive\desktop\thewalk\trap.cpp
-	"trap.h"
-
-1588244926 c:\users\mara\onedrive\desktop\thewalk\trap.h
-	<iostream>
 

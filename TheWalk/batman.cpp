@@ -14,10 +14,16 @@ void batman::Move(harta &H)
     H.trigger(row,col,viz);
     H.check(make_pair(row,col),viz);
 
+    /*for(int i=max(0,row-viz); i<min(H.n,row+viz+1); i++)
+    {
+        for(int j=max(0,col-viz); j<min(H.m,col+viz+1); j++)
+            cout<<H.dist[i][j]<<" ";
+        cout<<endl;
+    }*/
+
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
-        cout<<"finish in perimetru vizibil"<<endl;
         if (H.finish.first < row && row>=1)
         {
             if(H.dist[row-1][col]!=-1)
@@ -55,30 +61,36 @@ void batman::Move(harta &H)
     {
         if(row==H.n-1)
         {
-            if((H.matrix[0][col+1]=='_' || H.matrix[0][col+1]=='1' || H.matrix[0][col+1]=='2') ||
-               (countItems1>0 && countItems2>0) || (countItems1>0 && H.matrix[0][col+1]=='X'))
+            if(H.matrix[0][col+1]=='_' || H.matrix[0][col+1]=='1' || H.matrix[0][col+1]=='2')
             {
                 row=0;
                 col++;
                 ok=1;
-                if(countItems1>0 && countItems2>0 && H.matrix[row][col]=='Z') H.matrix[row][col]='?';
-                if(countItems1>0 && H.matrix[row][col]=='X') H.matrix[row][col]='!';
+            }
+            else if(H.matrix[row][col+1]=='_' || H.matrix[row][col+1]=='1' || H.matrix[row][col+1]=='2')
+            {
+                col++;
+                ok=1;
             }
         }
         else if(col==H.m-1)
         {
-            if((H.matrix[row+1][0]=='_' || H.matrix[row+1][0]=='1' || H.matrix[row+1][0]=='2') ||
-               (countItems1>0 && countItems2>0) || (countItems1>0 && H.matrix[row+1][0]=='X'))
+            row++;
+            col=0;
+            ok=1;
+        }
+        else if(row==0 && col!=0)
+        {
+            if(H.matrix[row+1][col]=='3' && H.matrix[row][col+1]=='3') {row++; ok=1;}
+            /*else if(H.matrix[row+1][col]=='X' || H.matrix[row+1][col]=='Z')
             {
-                row++;
-                col=0;
-                ok=1;
-                if(countItems1>0 && countItems2>0 && H.matrix[row][col]=='Z') H.matrix[row][col]='?';
-                if(countItems1>0 && H.matrix[row][col]=='X') H.matrix[row][col]='!';
-            }
+                if((H.matrix[row][col+1]=='_' || H.matrix[row][col+1]=='1' || H.matrix[row][col+1]=='2') && col<H.m-1) {col++; ok=1;}
+                else
+            }*/
         }
         else
         {
+
             if(H.dist[row+1][col]!=-1)
             {
                 row++;
@@ -131,12 +143,10 @@ void batman::Move(harta &H)
         }
     }
 
-
     if(ok==0)   //Nu putem sa ne mutam pe orizontala (alta coloana) si nici nu vrem sa revenim la pozitia anterioara
     {
-        //Facem un compromis si alegem sa trecem prin capcana, daca exista
-        //Evitam itemurile 3 si senzorii pe cat de mult putem
-
+        //Facem un compromis si alegem sa trecem prin capcana, daca exista; Evitam itemurile 3 si senzorii pe cat de mult putem
+        // mergem doar pe 2 directii; daca pierd vieti/itemuri, macar sa avansez
         if(H.matrix[row+1][col]=='X')
         {
             row++;
@@ -160,8 +170,7 @@ void batman::Move(harta &H)
 
         if(ok==1)
         {
-            if(countItems1>0 && countItems2>0) H.matrix[row][col]='!';
-            else if(countItems1>1)
+            if(countItems1>1)
             {
                 countItems1--;           //Are itemuri de tip batman, deci poate distruge capcanele
                 H.matrix[row][col]='!';  //Semn specific pt capcana distrusa
@@ -191,7 +200,7 @@ void batman::Move(harta &H)
         }
     }
 
-    if(ok==0)
+    if(ok==0)           // mergem doar pe doua directii; daca tot pierd vieti, macar sa avansez
     {
         if(H.matrix[row+1][col]=='Z')
         {
@@ -201,16 +210,6 @@ void batman::Move(harta &H)
         else if(H.matrix[row][col+1]=='Z')
         {
             col++;
-            ok=1;
-        }
-        else if(H.matrix[row][col-1]=='Z' && col>=1)
-        {
-            col--;
-            ok=1;
-        }
-        else if(H.matrix[row-1][col]=='Z' && row>=1)
-        {
-            row--;
             ok=1;
         }
 
@@ -223,26 +222,9 @@ void batman::Move(harta &H)
 
     if(ok==0)                                                            //Ultima solutie ramasa: itemul de tip joker (sau casuta deja vizitata???)
     {
-        if(H.matrix[row+1][col]=='3')
-        {
-            row++;
-            ok=1;
-        }
-        else if(H.matrix[row][col+1]=='3')
-        {
-            col++;
-            ok=1;
-        }
-        else if(H.matrix[row][col-1]=='3' && col>=1)
-        {
-            col--;
-            ok=1;
-        }
-        else if(H.matrix[row-1][col]=='3' && row>=1)
-        {
-            row--;
-            ok=1;
-        }
+        if(H.matrix[row+1][col]=='3') row++;
+        else if(H.matrix[row][col+1]=='3') col++;
+        else if(H.matrix[row][col-1]=='R' && H.matrix[row][col+1]=='R' && H.matrix[row+1][col]=='R' && H.matrix[row-1][col]=='3' && row>=1) row--;
     }
     if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
     EffectItem(row,col,H);
@@ -252,7 +234,7 @@ void batman::Move(harta &H)
 
 void batman::EffectItem(int x, int y, harta &H)
 {
-    char *message =new char[1000];
+    char *message =new char[10000];
     message[0]='\0';
     if(H.matrix[x][y]=='2')
     {

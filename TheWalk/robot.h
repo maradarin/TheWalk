@@ -4,15 +4,14 @@
 using namespace std;
 
 
-class harta;
-class robot                                                 //clasa abstracta
+class harta;                                          //declarare tip "forward"
+class robot                                           //clasa abstracta
 {
 protected:
     int row,col,viz;
-    static int vieti,countItems1,countItems2,countItems3;
+    int vieti,countItems1,countItems2,countItems3;
 public:
-    //friend class harta;
-    robot():row(0),col(0),viz(2) {}
+    robot():row(0),col(0),viz(2),vieti(4),countItems1(0),countItems2(0),countItems3(0) {}
     int getRow() {return row;}
     int getCol() {return col;}
     int getVieti() {return vieti;}
