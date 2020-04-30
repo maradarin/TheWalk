@@ -216,8 +216,8 @@ void batman::Move(harta &H)
         if(ok==1)
         {
             vieti-=2;
-            H.matrix[row][col]='*';
-        }                                         //Semn specific pt senzor alertat
+            H.matrix[row][col]='*';               //Semn specific pt senzor alertat
+        }                                         
     }
 
     if(ok==0)                                     //Ultima solutie ramasa: itemul de tip joker
