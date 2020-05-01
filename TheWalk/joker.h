@@ -9,7 +9,7 @@ class joker : public robot
 public:
     void Move(harta&);
     void EffectItem(const int, const int, harta&);
-    virtual ~joker() {};
+    //virtual ~joker() {};
 };
 
 #endif //_JOKER_H_

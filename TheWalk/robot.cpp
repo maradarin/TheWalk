@@ -8,6 +8,65 @@ int robot::countItems2=0;
 int robot::countItems3=0;
 
 
+pair<int, int> robot::getPos() const
+{
+    return make_pair(row,col);
+}
+
+void robot::setPos(int a, int b)
+{
+    row=a;
+    col=b;
+}
+
+int robot::getIT(int type) const
+{
+    if(type==1) return countItems1;
+    else if(type==2) return countItems2;
+    else if(type==3) return countItems3;
+}
+
+void robot::setIT(int type, int m)
+{
+    if(type==1)
+    {
+        if(m==1) countItems1++;
+        else if(m==-1) countItems1--;
+        else countItems1=0;
+    }
+    else if(type==2)
+    {
+        if(m==1) countItems2++;
+        else if(m==-1) countItems2--;
+        else countItems2=0;
+    }
+    else if(type==3)
+    {
+        if(m==1) countItems3++;
+        else if(m==-1) countItems3--;
+        else countItems3=0;
+    }
+}
+
+void robot::setViz(int nr)
+{
+    if(nr==1) viz++;
+    else viz--;
+}
+
+void robot::setLife(int nr)
+{
+    if(nr>0)
+    {
+        for(int i=1;i<=nr;i++) vieti++;
+    }
+    else
+    {
+        nr=-nr;
+        for(int i=1;i<=nr;i++) vieti--;
+    }
+}
+
 void robot::stats()
 {
     cout<<"You have "<<vieti<<" lives left"<<endl;

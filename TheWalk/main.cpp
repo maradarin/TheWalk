@@ -9,15 +9,44 @@
 #include "robin.h"
 #include "joker.h"
 using namespace std;
-int ok;
 
 
 int main()
 {
     srand(time(NULL));
-    harta H;
-    int type,ok;
-    cin>>H;
+    harta *H;
+    int type,ok,stop=0,n,m;
+    cout<<"Introduceti latimea hartii: ";
+    while(stop==0)
+    {
+        cin>>n;
+        try
+        {
+            if(n<15) throw n;
+            else stop=1;
+        }
+        catch(...)
+        {
+            cout<<"\nLatimea trebuie sa fie minim 15: ";
+        }
+    }
+    stop=0;
+    cout<<"\nIntroduceti lungimea hartii: ";
+    while(stop==0)
+    {
+        cin>>m;
+        try
+        {
+            if(m<15) throw m;
+            else stop=1;
+        }
+        catch(...)
+        {
+            cout<<"\nLungimea trebuie sa fie minim 15: ";
+        }
+    }
+    cout<<endl;
+    H=new harta(n,m);
     cout<<"Alege Robotul (Batman/Robin/Joker) : ";
     robot *p=NULL;
     while(ok)
@@ -29,20 +58,17 @@ int main()
 
         case 1:
         {
-            batman A;
-            p=&A;
+            p=new batman();
             break;
         }
         case 2:
         {
-            robin A;
-            p=&A;
+            p=new robin();
             break;
         }
         case 3:
         {
-            joker A;
-            p=&A;
+            p=new joker();
             break;
         }
         default:
@@ -50,7 +76,8 @@ int main()
             ok=1;
         }
     }
-    if(p!=NULL) H.Simulate(*p);
-
+    if(p!=NULL) H->Simulate(*p);
+    delete H;
+    delete p;
     return 0;
 }

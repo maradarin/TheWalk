@@ -16,6 +16,8 @@ int joker::mode = 0;
 
 void joker::Move(harta &H)
 {
+    int row=getPos().first, col=getPos().second, viz=getViz();
+    EffectItem(row,col,H);
     H.trigger(row,col,viz);
 
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
@@ -68,10 +70,10 @@ void joker::Move(harta &H)
             else row++;
         }
     }
-    if(countItems3>0 || countItems1==0) {if(H.matrix[row][col]=='X') vieti--; else if(H.matrix[row][col]=='Z') vieti-=2; }
-    else if(countItems2>0) {if(H.matrix[row][col]=='Z') vieti-=2;}
+    if(getIT(3)>0 || getIT(1)==0) {if(H.matrix[row][col]=='X') setLife(-1); else if(H.matrix[row][col]=='Z') setLife(-2); }
+    else if(getIT(2)>0) {if(H.matrix[row][col]=='Z') setLife(-2);}
     H.matrix[row][col]='R';
-    EffectItem(row,col,H);
+    setPos(row,col);
 }
 
 
@@ -83,16 +85,16 @@ void joker::EffectItem(const int x, const int y, harta &H)
     {
         strcpy(message, "You found a robin-item!\n");
         strcat(message,"You've lost your immunity to sensors, but gained one more visibility point.");
-        countItems2=1;
-        viz++;
+        setIT(2,1);
+        setViz(1);
     }
     else if(H.matrix[x][y]=='3')
     {
         strcpy(message, "You found a joker-item!\n");
-        vieti+=3;
-        if(countItems1>0)
+        setLife(3);
+        if(getIT(1)>0)
         {
-            countItems1=0;
+            setIT(1,0);
             strcat(message,"You lost your immunity, but gained 3 more lives.\n");
         }
         else strcat(message,"You gained 3 more lives.\n");
@@ -100,7 +102,7 @@ void joker::EffectItem(const int x, const int y, harta &H)
     else if(H.matrix[x][y]=='1')
     {
         strcpy(message, "You found a batman-item!\n");
-        countItems1=1;
+        setIT(1,1);
         strcat(message, "You gained immunity to all traps.\n");
     }
     cout<<message;

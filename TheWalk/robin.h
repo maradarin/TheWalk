@@ -11,7 +11,7 @@ public:
     void Move(harta&);                         //Robot2 se deplaseaza pe coloane
     void EffectItem(const int, const int, harta&);
     bool findCoord(const int, const int) const;
-    virtual ~robin() {};
+    //virtual ~robin() {};
 };
 
 #endif //_ROBIN_H_

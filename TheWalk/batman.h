@@ -8,7 +8,7 @@ class batman : public robot
 public:
     void Move(harta&);                          //Robot1 se deplaseaza pe linii
     void EffectItem(const int, const int, harta&);
-    virtual ~batman() {};
+    //virtual ~batman() {};
 };
 
 

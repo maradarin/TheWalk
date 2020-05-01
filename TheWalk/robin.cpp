@@ -19,6 +19,7 @@ bool robin::findCoord(const int a, const int b) const
 
 void robin::Move(harta &H)
 {
+    int row=getPos().first, col=getPos().second, viz=getViz();
     EffectItem(row,col,H);
     int ok=0;
     H.trigger(row,col,viz);
@@ -33,19 +34,19 @@ void robin::Move(harta &H)
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
-        if(countItems2>0 && H.finish.first>row && H.finish.second>col && H.dist[row+1][col+1]!=-1)
+        if(getIT(2)>0 && H.finish.first>row && H.finish.second>col && H.dist[row+1][col+1]!=-1)
         {
             row++;
             col++;
             ok=1;
         }
-        else if(countItems2>0 && H.finish.first>row && H.finish.second<col && col>=1 && H.dist[row+1][col-1]!=-1)
+        else if(getIT(2)>0 && H.finish.first>row && H.finish.second<col && col>=1 && H.dist[row+1][col-1]!=-1)
         {
             row++;
             col--;
             ok=1;
         }
-        else if(countItems2>0 && H.finish.first<row && H.finish.second>col && row>=1 && H.dist[row-1][col+1]!=-1)
+        else if(getIT(2)>0 && H.finish.first<row && H.finish.second>col && row>=1 && H.dist[row-1][col+1]!=-1)
         {
             row--;
             col++;
@@ -82,19 +83,19 @@ void robin::Move(harta &H)
         for(vector<pair<int,int> >::iterator it=Coord2.begin(); it!=Coord2.end() && ok==0; it++)
             if (abs(it->first - row) <= viz && abs(it->second - col) <= viz)
             {
-                if(countItems2>0 && it->first>row && it->second>col && H.dist[row+1][col+1]!=-1)
+                if(getIT(2)>0 && it->first>row && it->second>col && H.dist[row+1][col+1]!=-1)
                 {
                     row++;
                     col++;
                     ok=1;
                 }
-                else if(countItems2>0 && it->first>row && it->second<col && col>=1 && H.dist[row+1][col-1]!=-1)
+                else if(getIT(2)>0 && it->first>row && it->second<col && col>=1 && H.dist[row+1][col-1]!=-1)
                 {
                     row++;
                     col--;
                     ok=1;
                 }
-                else if(countItems2>0 && it->first<row && it->second>col && row>=1 && H.dist[row-1][col+1]!=-1)
+                else if(getIT(2)>0 && it->first<row && it->second>col && row>=1 && H.dist[row-1][col+1]!=-1)
                 {
                     row--;
                     col++;
@@ -126,8 +127,8 @@ void robin::Move(harta &H)
                 {
                     col++;
                     ok=1;
-                    if(H.matrix[row][col]=='Z') vieti=vieti-2;
-                    else if(H.matrix[row][col]=='X') vieti--;
+                    if(H.matrix[row][col]=='Z') setLife(-2);
+                    else if(H.matrix[row][col]=='X') setLife(-2);
                 }
             }
     }
@@ -145,19 +146,19 @@ void robin::Move(harta &H)
         }
         else
         {
-            if(countItems2>0 && H.finish.first>row && H.finish.second>col && H.dist[row+1][col+1]!=-1)
+            if(getIT(2)>0 && H.finish.first>row && H.finish.second>col && H.dist[row+1][col+1]!=-1)
             {
                 row++;
                 col++;
                 ok=1;
             }
-            else if(countItems2>0 && H.finish.first>row && H.finish.second<col && col>=1 && H.dist[row+1][col-1]!=-1)
+            else if(getIT(2)>0 && H.finish.first>row && H.finish.second<col && col>=1 && H.dist[row+1][col-1]!=-1)
             {
                 row++;
                 col--;
                 ok=1;
             }
-            else if(countItems2>0 && H.finish.first<row && H.finish.second>col && row>=1 && H.dist[row-1][col+1]!=-1)
+            else if(getIT(2)>0 && H.finish.first<row && H.finish.second>col && row>=1 && H.dist[row-1][col+1]!=-1)
             {
                 row--;
                 col++;
@@ -188,7 +189,7 @@ void robin::Move(harta &H)
 
     if(ok==0)
     {
-        if(countItems2>0 && countItems1>0)    // item 1+2 = imunitate la senzori
+        if(getIT(2)>0 && getIT(1)>0)    // item 1+2 = imunitate la senzori
         {
             if(H.matrix[row+1][col]=='Z')
             {
@@ -241,8 +242,8 @@ void robin::Move(harta &H)
 
         if(ok==1)
         {
-            vieti--;
-            if(countItems3>0) vieti--;
+            setLife(-1);
+            if(getIT(3)>0) setLife(-1);
             H.matrix[row][col]='@'; //Semn specific pt capcana declansata (seamana cu o explozie)
         }
     }
@@ -273,7 +274,7 @@ void robin::Move(harta &H)
 
         if(ok==1)
         {
-            vieti-=2;
+            setLife(-2);
             H.matrix[row][col]='*';                     //Semn specific pt senzor alertat
         }
     }
@@ -302,7 +303,8 @@ void robin::Move(harta &H)
         }
     }
     if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
-    if(isBlocked(row,col,H)==true) vieti=-100;
+    if(isBlocked(row,col,H)==true) setLife(-10);
+    setPos(row,col);
 }
 
 
@@ -314,31 +316,31 @@ void robin::EffectItem(const int x, const int y, harta &H)
     {
         Coord2.erase(remove(Coord2.begin(), Coord2.end(), make_pair(x,y)), Coord2.end());
         strcpy(message, "You found a robin-item! This will increase your visibility with 1 point and help you move diagonally.\n");
-        countItems2++;
-        viz++;
+        setIT(2,1);
+        setViz(1);
         H.matrix[x][y]='R';
     }
     else if(H.matrix[x][y]=='3')
     {
         strcpy(message, "Oh no, you found a joker-item! In order to save yourself, exchange a robin item.\n");
-        if(countItems2>0)
+        if(getIT(2)>0)
         {
-            countItems2--;
-            viz--;
+            setIT(2,-1);
+            setViz(-1);
             strcat(message,"You got lucky and managed to get rid of the joker-item!\n");
         }
         else
         {
-            countItems3++;
+            setIT(3,1);
             strcat(message,"The joker-item stuck with you and each time you cross over a bomb, you shall lose 2 lives.\n");
         }
         H.matrix[x][y]='R';
     }
     else if(H.matrix[x][y]=='1')
     {
-        countItems1++;
+        setIT(1,1);
         strcpy(message, "You found a batman-item which will aid Robin in his quest!\n");
-        if(countItems2>0) strcat(message, "You have gained immunity to all sensors.\n");
+        if(getIT(2)>0) strcat(message, "You have gained immunity to all sensors.\n");
         H.matrix[x][y]='R';
     }
     cout<<message;

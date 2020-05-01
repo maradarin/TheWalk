@@ -20,11 +20,11 @@ public:
     friend class batman;
     friend class robin;
     friend class joker;
-    harta():n(0),m(0) {}                     //constructor fara parametri
+    harta(int, int);                 //constructor cu parametri default
     ~harta();                                //destructor
     char getCell(const int, const int) const;//getter care returneaza valoarea dintr-o celula a hartii
     pair<int, int> getDim() const;           //getter pt dimensiunile hartii, returnate sub forma de pereche
-    friend istream & operator >> (istream &, harta &);
+    //friend istream & operator >> (istream &, harta &);
     friend ostream & operator << (ostream &, const harta &);
     bool isValid(const int, const int, const char) const;      //verifica daca o celula apartine hartii
     bool findCoord(const int, const int) const;                //verifica prezenta unei perechi de coordonate intr-o coada; metoda folosita pt marcarea senzorilor
