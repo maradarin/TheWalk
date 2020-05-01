@@ -7,6 +7,7 @@ int robot::countItems1=0;
 int robot::countItems2=0;
 int robot::countItems3=0;
 
+robot::robot():row(0),col(0),viz(2) {}
 
 pair<int, int> robot::getPos() const
 {
@@ -19,52 +20,38 @@ void robot::setPos(int a, int b)
     col=b;
 }
 
-int robot::getIT(int type) const
+int robot::getIT(const int type) const
 {
     if(type==1) return countItems1;
-    else if(type==2) return countItems2;
-    else if(type==3) return countItems3;
+    if(type==2) return countItems2;
+    if(type==3) return countItems3;
+    return 0;
 }
 
 void robot::setIT(int type, int m)
 {
     if(type==1)
     {
-        if(m==1) countItems1++;
-        else if(m==-1) countItems1--;
-        else countItems1=0;
+        countItems1=m;
     }
     else if(type==2)
     {
-        if(m==1) countItems2++;
-        else if(m==-1) countItems2--;
-        else countItems2=0;
+        countItems2=m;
     }
     else if(type==3)
     {
-        if(m==1) countItems3++;
-        else if(m==-1) countItems3--;
-        else countItems3=0;
+        countItems3=m;
     }
 }
 
 void robot::setViz(int nr)
 {
-    if(nr==1) viz++;
-    else viz--;
+    viz=nr;
 }
 
-void robot::setLife(int nr)
+void robot::setVieti(int nr)
 {
-    if(nr>0)
-    {
-        for(int i=1;i<=nr;i++) vieti++;
-    }
-    else
-    {
-        nr=-nr;
-        for(int i=1;i<=nr;i++) vieti--;
-    }
+    vieti=nr;
 }
 
 void robot::stats()
@@ -74,6 +61,16 @@ void robot::stats()
     cout<<"You gathered "<<countItems1<< " batman items"<<endl;
     cout<<"You gathered "<<countItems2<< " robin items"<<endl;
     cout<<"You gathered "<<countItems3<< " joker items"<<endl;
+}
+
+int robot::getVieti() const
+{
+    return vieti;
+}
+
+int robot::getViz() const
+{
+    return viz;
 }
 
 

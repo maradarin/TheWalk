@@ -387,3 +387,91 @@
 	"robin.h"
 	"joker.h"
 
+1588357175 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\joker.cpp
+	"joker.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<algorithm>
+
+1588357175 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\joker.h
+	"robot.h"
+
+1588357175 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robot.h
+	<iostream>
+
+1588357175 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\strategy.h
+	<iostream>
+	<vector>
+
+1588357175 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\harta.h
+	<fstream>
+	<vector>
+	"strategy.h"
+
+1588357175 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\main.cpp
+	<iostream>
+	<algorithm>
+	<cctype>
+	<string>
+	<time.h>
+	"harta.h"
+	"robot.h"
+	"batman.h"
+	"robin.h"
+	"joker.h"
+
+1588357175 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\batman.h
+	"robot.h"
+
+1588357175 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robin.h
+	"robot.h"
+	<vector>
+
+1588360872 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robin.cpp
+	"robin.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<vector>
+	<algorithm>
+
+1588357175 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robot.cpp
+	"robot.h"
+	"harta.h"
+	<cstring>
+
+1588358983 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\batman.cpp
+	"batman.h"
+	"robot.h"
+	"harta.h"
+	<cstring>
+	<cstdlib>
+	<cmath>
+	<utility>
+	<algorithm>
+
+1588357175 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\harta.cpp
+	"harta.h"
+	<iostream>
+	<new>
+	<cstdlib>
+	"robot.h"
+	<utility>
+	<algorithm>
+	<vector>
+	<queue>
+
+1588358121 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\strategy.cpp
+	"strategy.h"
+	<iostream>
+	<vector>
+	<algorithm>
+	<queue>
+

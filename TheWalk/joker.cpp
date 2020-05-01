@@ -14,11 +14,11 @@ int joker::downRow=0;
 int joker::mode = 0;
 
 
-void joker::Move(harta &H)
+void joker::Move(harta &H, strategy &S)
 {
     int row=getPos().first, col=getPos().second, viz=getViz();
     EffectItem(row,col,H);
-    H.trigger(row,col,viz);
+    S.trigger(row,col,viz,H.matrix);
 
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
@@ -70,8 +70,8 @@ void joker::Move(harta &H)
             else row++;
         }
     }
-    if(getIT(3)>0 || getIT(1)==0) {if(H.matrix[row][col]=='X') setLife(-1); else if(H.matrix[row][col]=='Z') setLife(-2); }
-    else if(getIT(2)>0) {if(H.matrix[row][col]=='Z') setLife(-2);}
+    if(getIT(3)>0 || getIT(1)==0) {if(H.matrix[row][col]=='X') setVieti(getVieti()-1); else if(H.matrix[row][col]=='Z') setVieti(getVieti()-2); }
+    else if(getIT(2)>0) {if(H.matrix[row][col]=='Z') setVieti(getVieti()-2);}
     H.matrix[row][col]='R';
     setPos(row,col);
 }
@@ -86,12 +86,12 @@ void joker::EffectItem(const int x, const int y, harta &H)
         strcpy(message, "You found a robin-item!\n");
         strcat(message,"You've lost your immunity to sensors, but gained one more visibility point.");
         setIT(2,1);
-        setViz(1);
+        setViz(getViz()+1);
     }
     else if(H.matrix[x][y]=='3')
     {
         strcpy(message, "You found a joker-item!\n");
-        setLife(3);
+        setVieti(getVieti()+3);
         if(getIT(1)>0)
         {
             setIT(1,0);

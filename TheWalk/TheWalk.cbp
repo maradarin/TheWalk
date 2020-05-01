@@ -43,6 +43,8 @@
 		<Unit filename="robin.h" />
 		<Unit filename="robot.cpp" />
 		<Unit filename="robot.h" />
+		<Unit filename="strategy.cpp" />
+		<Unit filename="strategy.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

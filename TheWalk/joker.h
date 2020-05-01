@@ -7,9 +7,9 @@ class joker : public robot
 {
     static int leftCol,upRow,rightCol,downRow,mode;
 public:
-    void Move(harta&);
+    void Move(harta&, strategy&);                          //Un wildcard, daca intalneste capcane pe drum, nu le evita
     void EffectItem(const int, const int, harta&);
-    //virtual ~joker() {};
+    virtual ~joker() {};
 };
 
 #endif //_JOKER_H_
