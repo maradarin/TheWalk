@@ -7,8 +7,10 @@
 
 game* game::route = new game();
 
-game::game() :	pawn(NULL)
-{ }
+game::game()
+    : pawn(NULL)
+{
+}
 
 game::~game()
 {
@@ -18,40 +20,37 @@ game::~game()
 
 void game::play()
 {
-    int stop=0,n,m;
-    cout<<"Introduceti latimea hartii: ";
-    while(stop==0)
-    {
-        cin>>n;
-        try
-        {
-            if(n<15) throw n;
-            else stop=1;
+    int stop = 0, n, m;
+    cout << "Introduceti latimea hartii: ";
+    while (stop == 0) {
+        cin >> n;
+        try {
+            if (n < 15)
+                throw n;
+            else
+                stop = 1;
         }
-        catch(...)
-        {
-            cout<<"\nLatimea trebuie sa fie minim 15: ";
-        }
-    }
-    stop=0;
-    cout<<"\nIntroduceti lungimea hartii: ";
-    while(stop==0)
-    {
-        cin>>m;
-        try
-        {
-            if(m<15) throw m;
-            else stop=1;
-        }
-        catch(...)
-        {
-            cout<<"\nLungimea trebuie sa fie minim 15: ";
+        catch (...) {
+            cout << "\nLatimea trebuie sa fie minim 15: ";
         }
     }
-    cout<<endl;
-    plan=new harta(n,m);
+    stop = 0;
+    cout << "\nIntroduceti lungimea hartii: ";
+    while (stop == 0) {
+        cin >> m;
+        try {
+            if (m < 15)
+                throw m;
+            else
+                stop = 1;
+        }
+        catch (...) {
+            cout << "\nLungimea trebuie sa fie minim 15: ";
+        }
+    }
+    cout << endl;
+    plan = new harta(n, m);
     plan->Simulate(*pawn);
-
 }
 
 void game::setRobot1()

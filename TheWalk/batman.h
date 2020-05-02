@@ -3,14 +3,11 @@
 
 #include "robot.h"
 
-class batman : public robot
-{
+class batman : public robot {
 public:
-    void Move(harta&, strategy&);                          //Robot1 vrea sa ajunga neaparat la destinatie, cu pierderi minime
+    void Move(harta&, strategy&); //Robot1 vrea sa ajunga neaparat la destinatie, cu pierderi minime
     void EffectItem(const int, const int, harta&);
-    virtual ~batman() {};
+    virtual ~batman(){};
 };
 
-
 #endif //_BATMAN_H_
-

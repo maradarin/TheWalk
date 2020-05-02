@@ -387,70 +387,66 @@
 	"robin.h"
 	"joker.h"
 
-1588446925 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\joker.cpp
+1588455152 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\joker.cpp
 	"joker.h"
 	"robot.h"
 	"harta.h"
 	<cstring>
-	<cstdlib>
 	<cmath>
-	<utility>
 	<algorithm>
 
-1588446838 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\joker.h
+1588450054 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\joker.h
 	"robot.h"
 
-1588442055 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robot.h
+1588455515 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robot.h
 	<iostream>
 
-1588446660 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\strategy.h
+1588454162 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\strategy.h
 	<iostream>
 	<vector>
 	"harta.h"
 
-1588429301 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\harta.h
+1588455514 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\harta.h
 	<fstream>
 	<vector>
 	"strategy.h"
 
-1588427180 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\main.cpp
+1588455514 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\main.cpp
 	<iostream>
 	<algorithm>
 	<time.h>
 	"game.h"
 	"robot.h"
 
-1588357175 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\batman.h
+1588449953 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\batman.h
 	"robot.h"
 
-1588434149 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robin.h
+1588449953 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robin.h
 	"robot.h"
 	<vector>
 
-1588435645 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robin.cpp
+1588450054 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robin.cpp
 	"robin.h"
 	"robot.h"
 	"harta.h"
 	<cstring>
-	<cstdlib>
 	<cmath>
-	<utility>
 	<vector>
 	<algorithm>
 
-1588442069 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robot.cpp
+1588455515 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\robot.cpp
 	"robot.h"
 	"harta.h"
 	<cstring>
 
-1588433788 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\batman.cpp
+1588455515 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\batman.cpp
 	"batman.h"
 	"robot.h"
 	"harta.h"
 	<cstring>
 	<cmath>
 
-1588420732 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\harta.cpp
+1588455515 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\harta.cpp
 	"harta.h"
 	<iostream>
 	"robot.h"
@@ -458,7 +454,7 @@
 	<vector>
 	<queue>
 
-1588446838 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\strategy.cpp
+1588455515 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\strategy.cpp
 	"strategy.h"
 	"robot.h"
 	"joker.h"
@@ -468,7 +464,7 @@
 	<queue>
 	<cstring>
 
-1588435609 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\game.cpp
+1588450054 source:c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\game.cpp
 	"game.h"
 	"harta.h"
 	"robot.h"
@@ -476,7 +472,7 @@
 	"robin.h"
 	"joker.h"
 
-1588435609 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\game.h
+1588450054 c:\users\mara\onedrive\desktop\thewalk pt pointeri - copy\game.h
 	"harta.h"
 	"strategy.h"
 	"robot.h"

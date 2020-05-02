@@ -5,37 +5,31 @@
 #include "robot.h"
 using namespace std;
 
-
 int main()
 {
-    int type,ok;
+    int type, ok;
     srand(time(NULL));
-    cout<<"Alege Robotul (Batman=1/Robin=2/Joker=3) : ";
-    while(ok)
-    {
-        cin>>type;
-        ok=0;
-        switch (type)
-        {
+    cout << "Alege Robotul (Batman=1/Robin=2/Joker=3) : ";
+    while (ok) {
+        cin >> type;
+        ok = 0;
+        switch (type) {
 
-        case 1:
-        {
+        case 1: {
             game::instance()->setRobot1();
             break;
         }
-        case 2:
-        {
+        case 2: {
             game::instance()->setRobot2();
             break;
         }
-        case 3:
-        {
+        case 3: {
             game::instance()->setRobot3();
             break;
         }
         default:
             cout << "Alegeti o optiune valida (1/2/3) : ";
-            ok=1;
+            ok = 1;
         }
     }
 
