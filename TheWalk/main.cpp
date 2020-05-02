@@ -1,54 +1,16 @@
 #include <iostream>
 #include <algorithm>
-#include <cctype>
-#include <string>
 #include <time.h>
-#include "harta.h"
+#include "game.h"
 #include "robot.h"
-#include "batman.h"
-#include "robin.h"
-#include "joker.h"
 using namespace std;
 
 
 int main()
 {
+    int type,ok;
     srand(time(NULL));
-    harta *H;
-    int type,ok,stop=0,n,m;
-    cout<<"Introduceti latimea hartii: ";
-    while(stop==0)
-    {
-        cin>>n;
-        try
-        {
-            if(n<15) throw n;
-            else stop=1;
-        }
-        catch(...)
-        {
-            cout<<"\nLatimea trebuie sa fie minim 15: ";
-        }
-    }
-    stop=0;
-    cout<<"\nIntroduceti lungimea hartii: ";
-    while(stop==0)
-    {
-        cin>>m;
-        try
-        {
-            if(m<15) throw m;
-            else stop=1;
-        }
-        catch(...)
-        {
-            cout<<"\nLungimea trebuie sa fie minim 15: ";
-        }
-    }
-    cout<<endl;
-    H=new harta(n,m);
-    cout<<"Alege Robotul (Batman/Robin/Joker) : ";
-    robot *p=NULL;
+    cout<<"Alege Robotul (Batman=1/Robin=2/Joker=3) : ";
     while(ok)
     {
         cin>>type;
@@ -58,17 +20,17 @@ int main()
 
         case 1:
         {
-            p=new batman();
+            game::instance()->setRobot1();
             break;
         }
         case 2:
         {
-            p=new robin();
+            game::instance()->setRobot2();
             break;
         }
         case 3:
         {
-            p=new joker();
+            game::instance()->setRobot3();
             break;
         }
         default:
@@ -76,8 +38,8 @@ int main()
             ok=1;
         }
     }
-    if(p!=NULL) H->Simulate(*p);
-    delete H;
-    delete p;
+
+    game::instance()->play();
+
     return 0;
 }

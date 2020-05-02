@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="batman.cpp" />
 		<Unit filename="batman.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
 		<Unit filename="harta.cpp" />
 		<Unit filename="harta.h" />
 		<Unit filename="joker.cpp" />

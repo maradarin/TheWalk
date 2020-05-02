@@ -1,4 +1,3 @@
-
 #ifndef _HARTA_H
 #define _HARTA_H
 #include <fstream>

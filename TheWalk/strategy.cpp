@@ -1,8 +1,11 @@
 #include "strategy.h"
+#include "robot.h"
+#include "joker.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include <cstring>
 using namespace std;
 
 strategy::strategy(int a=0, int b=0):n(a), m(b)
@@ -33,10 +36,110 @@ bool strategy::isValid(const int x, const int y, const char c, char **matrix) co
 
 }
 
-bool strategy::findCoord(const int a, const int b) const
+bool strategy::findCoord(const int a, const int b, vector<pair<int, int> > V) const
 {
     pair<int, int> p=make_pair(a,b);
-    if(find(ZCoord.begin(), ZCoord.end(), p) != ZCoord.end()) return false;
+    if(find(V.begin(), V.end(), p) != V.end()) return false;
+    return true;
+}
+
+bool strategy::isBlocked(const int row, const int col, harta& H) const  //verificam mutarile pe diagonala
+{
+    const char obs[]="R@?!*S";
+    if(row==0)
+    {
+        if(robot::correct(obs,H.getCell(row+1,col-1))==true)
+        {
+            if(col==H.getDim().second-1) return true;
+            if(col<H.getDim().second-1)
+            {
+                if(robot::correct(obs,H.getCell(row+1,col+1))==true)
+                    return true;
+            }
+        }
+    }
+    else if(col==0)
+    {
+        if(robot::correct(obs,H.getCell(row-1,col+1))==true)
+        {
+            if(row==H.getDim().first-1) return true;
+            if(row<H.getDim().first-1)
+            {
+                if(robot::correct(obs,H.getCell(row+1,col+1))==true)
+                    return true;
+            }
+        }
+    }
+    else if(row==H.getDim().first-1)
+    {
+        if(robot::correct(obs,H.getCell(row-1,col-1))==true)
+        {
+            if(col==H.getDim().second-1) return true;
+            if(col<H.getDim().second-1)
+            {
+                if(robot::correct(obs,H.getCell(row-1,col+1))==true)
+                    return true;
+            }
+        }
+
+    }
+    else if(col==H.getDim().second-1)
+    {
+        if(robot::correct(obs,H.getCell(row-1,col-1))==true &&
+                robot::correct(obs,H.getCell(row+1,col-1))==true)
+            return true;
+    }
+    else
+    {
+        if(robot::correct(obs,H.getCell(row+1,col-1))==true &&
+                robot::correct(obs,H.getCell(row+1,col+1))==true &&
+                robot::correct(obs,H.getCell(row-1,col+1))==true &&
+                robot::correct(obs,H.getCell(row-1,col-1))==true)
+            return true;
+    }
+    return false;
+}
+
+bool strategy::threeCells(int &row, int &col, harta &H, const char ok[], joker &J) const
+{
+    int old_r=row, old_c=col;
+    if(J.getMode()%4==0 && col<=H.getDim().second-J.getRight()-4)
+    {
+        if(robot::correct(ok,H.getCell(row,col+3))==true)
+            col+=3;
+        else if(robot::correct(ok,H.getCell(row,col+2))==true)
+            col+=2;
+        else if(robot::correct(ok,H.getCell(row,col+1))==true)
+            col++;
+    }
+    else if(J.getMode()%4==1 && row<=H.getDim().first-J.getDown()-4)
+    {
+        if(robot::correct(ok,H.getCell(row+3,col))==true)
+            row+=3;
+        else if(robot::correct(ok,H.getCell(row+2,col))==true)
+            row+=2;
+        else if(robot::correct(ok,H.getCell(row+1,col))==true)
+            row++;
+    }
+    else if(J.getMode()%4==2 && col>=J.getLeft()-3)
+    {
+        if(robot::correct(ok,H.getCell(row,col-3))==true)
+            col-=3;
+        else if(robot::correct(ok,H.getCell(row,col-2))==true)
+            col-=2;
+        else if(robot::correct(ok,H.getCell(row,col-1))==true)
+            col--;
+    }
+    else if(J.getMode()%4==3 && row>=J.getUp()-3)
+    {
+        if(robot::correct(ok,H.getCell(row-3,col))==true)
+            row-=3;
+        else if(robot::correct(ok,H.getCell(row-2,col))==true)
+            row-=2;
+        else if(robot::correct(ok,H.getCell(row-1,col))==true)
+            row--;
+    }
+    if(row-old_r==0 && col-old_c==0) return false;
     return true;
 }
 
@@ -46,7 +149,7 @@ void strategy::trigger(int row, int col, int viz, char **matrix)
     int colNum[] = { 0, -1, 1, 0 };
     for(int i=max(0,row-viz); i<min(1+row+viz,n); i++)                    //avand vizibilitatea de viz, verificam in avans posibilitatea
         for(int j=max(0,col-viz); j<min(col+viz+1,m); j++)                //declansarii senzorilor, ca sa-i putem evita
-            if(matrix[i][j]=='Z' && findCoord(i,j)==true)                 //aceasta conditie ne impiedica sa marcam casutele adiacente
+            if(matrix[i][j]=='Z' && findCoord(i,j,ZCoord)==true)          //aceasta conditie ne impiedica sa marcam casutele adiacente
                 //ale senzorilor declansati anterior
             {
                 ZCoord.push_back(make_pair(i,j));

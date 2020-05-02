@@ -1,9 +1,6 @@
 #include "harta.h"
 #include <iostream>
-#include <new>
-#include <cstdlib>
 #include "robot.h"
-#include <utility>
 #include <algorithm>
 #include <vector>
 #include <queue>
@@ -24,7 +21,8 @@ harta::harta(int a=0, int b=0): n(a),m(b),S(new strategy(a,b))
     {
         aux.first=rand()%n;
         aux.second=rand()%m;
-        if(aux.first!=0 && aux.second!=0)                     //Generare random pt pozitia de final; trebuie sa fie diferita de pozitia de start
+        if(aux.first!=0 && aux.second!=0)                   //Generare random pt pozitia de final
+                                                            //trebuie sa fie diferita de pozitia de start
         {
             ok=1;
             break;
@@ -82,7 +80,7 @@ harta::harta(int a=0, int b=0): n(a),m(b),S(new strategy(a,b))
             z = rand() % 3 + 1;                               //Itemuri de 3 tipuri (reprezentate cu 1,2,3 pe harta)
             if(matrix[x][y]=='_')
             {
-                if((z==3 && !(x==1 && y==0)) || z==1 || z==2) //Pt itemul de tip 3 evit prima pozitie pe care s-ar realiza mutarea
+                if((z==3 && !(x==1 && y==0)) || z==1 || z==2) //Pt itemul 3 evit prima pozitie pe care s-ar realiza mutarea
                 {
                     ok1=1;
                     break;

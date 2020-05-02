@@ -9,29 +9,19 @@
 #include <algorithm>
 
 
-bool robin::findCoord(const int a, const int b) const
-{
-    pair<int, int> p=make_pair(a,b);
-    if(find(Coord2.begin(), Coord2.end(), p) != Coord2.end()) return false;
-    return true;
-}
-
-
 void robin::Move(harta &H, strategy &S)
 {
     int row=getPos().first, col=getPos().second, viz=getViz();
     int ok=0;
-    EffectItem(row,col,H);
     S.trigger(row,col,viz,H.matrix);
     S.check(make_pair(row,col),viz,H.matrix);
 
     //retinem coordonatele itemurilor proprii din perimetrul vizibil
     for(int i=max(0,row-viz); i<min(H.n,row+viz+1); i++)
         for(int j=max(0,col-viz); j<min(H.m,col+viz+1); j++)
-            if(S.getCell(i,j)!=-1 && findCoord(i,j)==true && H.matrix[i][j]=='2')
+            if(S.getCell(i,j)!=-1 && S.findCoord(i,j,Coord2)==true && H.matrix[i][j]=='2')
                 Coord2.push_back(make_pair(i,j));
 
-    //cout<<Coord2.size()<<endl;
     //daca destinatia finala e in raza lui de actiune, atunci robotul o sa se indrepte spre ea
     if (abs(H.finish.first - row) <= viz && abs(H.finish.second - col) <= viz)
     {
@@ -58,11 +48,11 @@ void robin::Move(harta &H, strategy &S)
         else if(getIT(2)>0 && H.finish.first<row && H.finish.second>col && row>=1)
         {
             if(S.getCell(row-1,col+1)!=-1 || (getIT(1)>0 && H.matrix[row-1][col+1]=='Z'))
-                {
-                    row--;
-                    col++;
-                    ok=1;
-                }
+            {
+                row--;
+                col++;
+                ok=1;
+            }
         }
         else if(getIT(2)>0 && H.finish.first<row && H.finish.second<col && row>=1 && col>=1)
         {
@@ -126,11 +116,11 @@ void robin::Move(harta &H, strategy &S)
                 else if(getIT(2)>0 && it->first<row && it->second>col && row>=1)
                 {
                     if(S.getCell(row-1,col+1)!=-1 || (getIT(1)>0 && H.matrix[row-1][col+1]=='Z'))
-                        {
-                            row--;
-                            col++;
-                            ok=1;
-                        }
+                    {
+                        row--;
+                        col++;
+                        ok=1;
+                    }
                 }
                 else if(getIT(2)>0 && it->first<row && it->second<col && row>=1 && col>=1)
                 {
@@ -250,7 +240,8 @@ void robin::Move(harta &H, strategy &S)
                 col--;
                 ok=1;
             }
-            if(ok==1) H.matrix[row][col]='?'; // Semnul specific pt senzor evitat
+            if(ok==1)
+                H.matrix[row][col]='?'; // Semnul specific pt senzor evitat
         }
     }
 
@@ -282,7 +273,8 @@ void robin::Move(harta &H, strategy &S)
         if(ok==1)
         {
             setVieti(getVieti()-1);
-            if(getIT(3)>0) setVieti(getVieti()-1);
+            if(getIT(3)>0)
+                setVieti(getVieti()-1);
             H.matrix[row][col]='@'; //Semn specific pt capcana declansata (seamana cu o explozie)
         }
     }
@@ -313,7 +305,8 @@ void robin::Move(harta &H, strategy &S)
 
         if(ok==1)
         {
-            if(getIT(2)*getIT(1)==0) setVieti(getVieti()-2);
+            if(getIT(2)*getIT(1)==0)
+                setVieti(getVieti()-2);
             H.matrix[row][col]='*';  //Semn specific pt senzor alertat
         }
     }
@@ -341,9 +334,12 @@ void robin::Move(harta &H, strategy &S)
             ok=1;
         }
     }
-    if(H.matrix[row][col]=='_') H.matrix[row][col]='R';
-    if(isBlocked(row,col,H)==true) setVieti(-100);
+    if(H.matrix[row][col]=='_')
+        H.matrix[row][col]='R';
+    if(isBlocked(row,col,H)==true || S.isBlocked(row,col,H)==true)
+        setVieti(-100);
     setPos(row,col);
+    EffectItem(row,col,H);
 }
 
 
@@ -379,7 +375,8 @@ void robin::EffectItem(const int x, const int y, harta &H)
     {
         setIT(1,1);
         strcpy(message, "You found a batman-item which will aid Robin in his quest!\n");
-        if(getIT(2)>0) strcat(message, "You have gained immunity to all sensors.\n");
+        if(getIT(2)>0)
+            strcat(message, "You have gained immunity to all sensors.\n");
         H.matrix[x][y]='R';
     }
     cout<<message;
@@ -391,4 +388,3 @@ robin::~robin()
 {
     Coord2.clear();
 }
-

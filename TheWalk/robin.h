@@ -10,7 +10,6 @@ class robin : public robot
 public:
     void Move(harta&, strategy&);                     //Robot2 vrea sa ajunga la destinatie, adunand cat mai multe itemuri 2
     void EffectItem(const int, const int, harta&);
-    bool findCoord(const int, const int) const;
     virtual ~robin();
 };
 
