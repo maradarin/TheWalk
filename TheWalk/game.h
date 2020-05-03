@@ -19,8 +19,7 @@ public:
     void setRobot1();
     void setRobot2();
     void setRobot3();
-    static game* instance() //aceasta metoda statica e folosita pt accesarea
-    //singurei instante
+    static game* instance() //aceasta metoda statica e folosita pt accesarea singurei instante
     {
         return route;
     }
