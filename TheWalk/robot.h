@@ -23,8 +23,7 @@ public:
     int getVieti() const;
     int getViz() const;
     static bool correct(const char*, const char); //verifica apartenenta unei litere la un array de caractere
-    //metoda este declarata statica pt a putea fi apelata in alta
-    //clasa, fara sa declaram un obiect de tip robot
+    //metoda este declarata statica pt a putea fi apelata in alta clasa fara sa declaram un obiect de tip robot
     bool isBlocked(const int, const int, harta&) const; //functie care verifica daca un robot a ramas blocat pe harta
     virtual void Move(harta&, strategy&) = 0; //metoda virtual pura de deplasare a robotuluii
     virtual void EffectItem(const int, const int, harta&) = 0; //metoda virtual pura de folosire a itemului
