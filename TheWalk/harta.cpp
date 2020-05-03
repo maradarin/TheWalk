@@ -23,8 +23,7 @@ harta::harta(int a = 0, int b = 0)
     while (ok == 0) {
         aux.first = rand() % n;
         aux.second = rand() % m;
-        if (aux.first != 0 && aux.second != 0) //Generare random pt pozitia de final
-        //trebuie sa fie diferita de pozitia de start
+        if (aux.first != 0 && aux.second != 0) //Generare random pt pozitia de final care difera de pozitia de start
         {
             ok = 1;
             break;
@@ -46,8 +45,8 @@ harta::harta(int a = 0, int b = 0)
         while (ok1 == 0) {
             x = rand() % n;
             y = rand() % m;
-            if (matrix[x][y] == '_' && !(x == 1 && y == 0)) //Evit pozitia pe care s-ar realiza prima mutare
-            //Pt a nu bloca robotul de la inceput
+            if (matrix[x][y] == '_' && !(x == 1 && y == 0))
+            //Evit pozitia pe care s-ar realiza prima mutare pt a nu bloca robotul de la inceput
             {
                 ok1 = 1;
                 break;
@@ -61,8 +60,8 @@ harta::harta(int a = 0, int b = 0)
         while (ok1 == 0) {
             x = rand() % n;
             y = rand() % m;
-            if (matrix[x][y] == '_' && !(x == 1 && y == 0)) //Evit pozitia pe care s-ar realiza prima mutare
-            //Pt a nu bloca robotul de la inceput
+            if (matrix[x][y] == '_' && !(x == 1 && y == 0))
+            //Evit pozitia pe care s-ar realiza prima mutare pt a nu bloca robotul de la inceput
             {
                 ok1 = 1;
                 break;
@@ -78,7 +77,8 @@ harta::harta(int a = 0, int b = 0)
             y = rand() % m;
             z = rand() % 3 + 1; //Itemuri de 3 tipuri (reprezentate cu 1,2,3 pe harta)
             if (matrix[x][y] == '_') {
-                if ((z == 3 && !(x == 1 && y == 0)) || z == 1 || z == 2) //Pt itemul 3 evit prima pozitie pe care s-ar realiza mutarea
+                if ((z == 3 && !(x == 1 && y == 0)) || z == 1 || z == 2)
+                //Pt itemul 3 evit prima pozitie pe care s-ar realiza mutarea
                 {
                     ok1 = 1;
                     break;
